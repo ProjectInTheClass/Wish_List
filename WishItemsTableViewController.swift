@@ -14,16 +14,17 @@ class WishItemsCellView:UITableViewCell{
     @IBOutlet weak var Money : UILabel?
     @IBOutlet weak var ItemImg : UIImageView?
     @IBOutlet weak var Date : UILabel?
-    
+    @IBOutlet weak var BarFrame : UIImageView?
+    @IBOutlet weak var Bar : UIImageView?
 }
 class WishItemsViewController : UIViewController{
     @IBOutlet weak var tableview: UITableView?
-    public var data:Wish_Item?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        tableview?.rowHeight = 106
         tableview?.dataSource = self
         tableview?.delegate = self
     }
@@ -43,7 +44,16 @@ extension WishItemsViewController: UITableViewDataSource{
         // 첫 번째 인자로 등록한 identifier, cell은 as 키워드로 앞서 만든 custom cell class화 해준다.
         let cell = tableview?.dequeueReusableCell(withIdentifier: "WishItems", for: indexPath as IndexPath) as! WishItemsCellView // 위 작업을 마치면 커스텀 클래스의 outlet을 사용할 수 있다.
         cell.Itemname?.text = Items[indexPath.row].name
-        //cell.ItemImg?.image = UIImage(named: (Items[indexPath.row].img?.description)!)
+        cell.ItemImg?.image = Items[indexPath.row].img
+        cell.BarFrame?.image = UIImage(named: "gauge")
+        cell.Bar?.image = UIImage(named: "green")
+        //if Items[indexPath.row].d_day == {
+          //  cell.Date?.text = "기간 제한 없음"
+        //}
+        //else{
+          //  cell.Date?.text = Items[indexPath.row].d_day?.description
+        //}
+        
         return cell
     }
 }
