@@ -76,5 +76,7 @@ func makeDummy() -> [Wish_Item] {
     return Items
 }
 
-let Items:[Wish_Item] = makeDummy()
+
+
+var Items:[Wish_Item] = makeDummy()
 let no = Items.count

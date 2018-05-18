@@ -33,6 +33,24 @@ class WishItemsViewController : UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func sortItemList(_ sender: Any) {
+        let selectSortMethod = UIAlertController(title: "목록 정렬 방식", message: "", preferredStyle: .actionSheet)
+        let sortByName = UIAlertAction(title: "이름에 따라 정렬", style: .default, handler: {(action:UIAlertAction) -> Void in
+            Items.sort(by: {$0.name < $1.name})
+            self.tableview?.reloadData()
+        })
+        let sortByDeadline = UIAlertAction(title:"마감일에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
+            //Items.sort(by: {$0.d_day! < $1.d_day!})
+            self.tableview?.reloadData()
+        })
+        
+        selectSortMethod.addAction(sortByName)
+        selectSortMethod.addAction(sortByDeadline)
+        
+        self.present(selectSortMethod, animated:true, completion:nil)
+    }
+    
 }
 
 extension WishItemsViewController: UITableViewDataSource{
