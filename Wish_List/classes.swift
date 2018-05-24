@@ -31,12 +31,16 @@ class Wish_Item {
     var save : Int              //해당 목표물에 내가 투자한 금액
     var m_info : Array<history>? //돈 넣고 뺀 기록
     var favorite : Bool         //즐겨찾기
+    var endisnear : Bool        //달성임박
+    var dayiscomming : Bool     //마감임박
     var memo : String?           //이걸 위해 돈을 모으는 나를 향해 계획을 세운 내가 할 말
     
     init(name :String,favorite:Bool){
         self.name = name
         self.save = 0
         self.favorite = favorite
+        self.endisnear = false
+        self.dayiscomming = false
         self.img = UIImage(named:"noimg")
         //self.d_day = ""
     }
@@ -45,6 +49,8 @@ class Wish_Item {
         self.name = name
         self.save = 0
         self.favorite = favorite
+        self.endisnear = false
+        self.dayiscomming = false
         self.img = img
     }
     func loadpicture(img: UIImage?) {
@@ -56,8 +62,12 @@ class Wish_Item {
 func makeDummy() -> [Wish_Item] {
     var Items:[Wish_Item]=[]
     var car = Wish_Item(name: "차",favorite: false,img: UIImage(named:"car"))
+    car.price = 100000000
+    car.save = 90000000
     Items += [car]
     var notebook = Wish_Item(name: "노트북",favorite: true)
+    notebook.price = 100000
+    notebook.save = 10000
     Items += [notebook]
     let borrow = Wish_Item(name: "빌린 돈",favorite: true)
     Items += [borrow]
@@ -76,7 +86,5 @@ func makeDummy() -> [Wish_Item] {
     return Items
 }
 
-
-
-var Items:[Wish_Item] = makeDummy()
+let Items:[Wish_Item] = makeDummy()
 let no = Items.count
