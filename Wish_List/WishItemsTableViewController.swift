@@ -20,7 +20,7 @@ class WishItemsCellView:UITableViewCell{
 }
 class WishItemsViewController : UIViewController{
     @IBOutlet weak var tableview: UITableView?
-    let proj:[Wish_Item] = Items        //저장된 class list(Items = test list)를 proj가 참조
+    var proj:[Wish_Item] = Items        //저장된 class list(Items = test list)를 proj가 참조
     
     
     override func viewDidLoad() {
@@ -36,6 +36,22 @@ class WishItemsViewController : UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func sortItemList(_ sender: Any) {
+        let selectSortMethod = UIAlertController(title: "목록 정렬 방식", message: "", preferredStyle: .actionSheet)
+        let sortByName = UIAlertAction(title: "이름에 따라 정렬", style: .default, handler: {(action:UIAlertAction) -> Void in
+            Items.sort(by: {$0.name < $1.name})
+            self.tableview?.reloadData()
+        })
+        let sortByDeadline = UIAlertAction(title:"마감일에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
+            //Items.sort(by: {$0.d_day! < $1.d_day!})
+            self.tableview?.reloadData()
+        })
+        
+        selectSortMethod.addAction(sortByName)
+        selectSortMethod.addAction(sortByDeadline)
+        
+        self.present(selectSortMethod, animated:true, completion:nil)
+    }
     
     
 }
@@ -50,13 +66,15 @@ extension WishItemsViewController: UITableViewDataSource{
         // #warning Incomplete implementation, return the number of sections
         
         
-        return 4
+        //return 4
+        return 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let list:[String] = ["즐겨찾기","달성임박","마감임박","전체"]
+        //let list:[String] = ["즐겨찾기","달성임박","마감임박","전체"]
         
-        return list[section]
+        //return list[section]
+        return "전체"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,16 +102,19 @@ extension WishItemsViewController: UITableViewDataSource{
         }
         let new_width = (cell.Bar?.frame.size.width)! * percent
         cell.Bar?.frame.size = CGSize(width: new_width, height: (cell.Bar?.frame.size.height)!)
-        */
-        let prog: CGFloat
+         */
+        
+        var prog: CGFloat
         if proj[indexPath.row].price != nil{
             let pric:CGFloat = CGFloat(proj[indexPath.row].price!)
             prog = progress(origin: (cell.Bar)!,full: pric,compare: CGFloat(proj[indexPath.row].save))
-            cell.Percentage?.text = prog.description
+            prog = prog * 100
+            cell.Percentage?.text = prog.description + "%"
         }
         else{
             prog = progress(origin: (cell.Bar)!,full: 0,compare: CGFloat(proj[indexPath.row].save))
-            cell.Percentage?.text = prog.description
+            prog = prog * 100
+            cell.Percentage?.text = prog.description + "%"
         }
         
         cell.Bar?.image = UIImage(named: "green")

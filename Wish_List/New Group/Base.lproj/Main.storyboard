@@ -110,7 +110,18 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" id="4nQ-H3-ibQ"/>
+                    <navigationItem key="navigationItem" id="4nQ-H3-ibQ">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="8rG-2z-qMy">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="taA-AD-Mzn">
+                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="정렬"/>
+                                <connections>
+                                    <action selector="sortItemList:" destination="x2b-Xc-MSy" eventType="touchUpInside" id="mv6-r8-hDS"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableview" destination="owc-VE-3ez" id="5hY-9B-vr9"/>
                     </connections>
