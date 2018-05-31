@@ -60,14 +60,17 @@ class Wish_Item {
 }
 
 func makeDummy() -> [Wish_Item] {
+    formatter.dateFormat = "yyyy/MM/dd"
     var Items:[Wish_Item]=[]
     var car = Wish_Item(name: "차",favorite: false,img: UIImage(named:"car"))
     car.price = 100000000
     car.save = 90000000
+    car.d_day = formatter.date(from: "2018/06/01")
     Items += [car]
     var notebook = Wish_Item(name: "노트북",favorite: true)
     notebook.price = 100000
     notebook.save = 10000
+    notebook.d_day = formatter.date(from: "2018/06/01")
     Items += [notebook]
     let borrow = Wish_Item(name: "빌린 돈",favorite: true)
     Items += [borrow]
@@ -85,6 +88,8 @@ func makeDummy() -> [Wish_Item] {
     Items += [goldbar]
     return Items
 }
+
+let formatter = DateFormatter()
 
 var Items:[Wish_Item] = makeDummy()
 let no = Items.count
