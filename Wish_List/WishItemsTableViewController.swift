@@ -43,7 +43,7 @@ class WishItemsViewController : UIViewController{
             self.tableview?.reloadData()
         })
         let sortByDeadline = UIAlertAction(title:"마감일에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
-            //Items.sort(by: {$0.d_day! < $1.d_day!})
+            Items.sort(by: {$0.d_day! < $1.d_day!})
             self.tableview?.reloadData()
         })
         

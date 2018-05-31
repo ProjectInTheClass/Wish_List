@@ -11,12 +11,15 @@ import Foundation
 let endisnearCriterion = 0.7 // 달성률이 70% 이상일 때 달성임박
 let dayiscommingCriterion : TimeInterval = 7 * 24 * 3600 // 마감일이 일주일 이하 남았을 때 마감임박
 
-var favoriteIndex = 0
-var endisnearIndex = 0
-var dayiscommingIndex = 0
+var favoriteIndex = -1
+var endisnearIndex = -1
+var dayiscommingIndex = -1
 
 func getNextFavorite() {
     var curIndex = favoriteIndex + 1
+    if (curIndex == -1) {
+        curIndex = 0
+    }
     while (true) {
         if (curIndex >= Items.count) {
             curIndex = 0
@@ -37,6 +40,9 @@ func getNextFavorite() {
 
 func getNextEndisnear() {
     var curIndex = endisnearIndex + 1
+    if (curIndex == -1) {
+        curIndex = 0
+    }
     refreshEndisnear()
     while (true) {
         if (curIndex >= Items.count) {
@@ -58,6 +64,9 @@ func getNextEndisnear() {
 
 func getNextDayiscoming() {
     var curIndex = dayiscommingIndex + 1
+    if (curIndex == -1) {
+        curIndex = 0
+    }
     refreshDayiscomming()
     while (true) {
         if (curIndex >= Items.count) {

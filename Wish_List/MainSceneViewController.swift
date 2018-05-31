@@ -46,7 +46,7 @@ class MainSceneViewController: UIViewController {
         FavoriteSaved.text = String(Items[favoriteIndex].save) + "원"
         FavoriteGoal.text = String(Items[favoriteIndex].price!) + "원"
         FavoriteProgressBar.progress = Float(Items[favoriteIndex].save) / Float(Items[favoriteIndex].price!)
-        FavoriteProgress.text = String(FavoriteProgressBar.progress * 100) + "%"
+        FavoriteProgress.text = String(Int((FavoriteProgressBar.progress * 100).rounded())) + "%"
     }
     
     @IBAction func EndisnearRefresh(_ sender: Any) {
@@ -61,7 +61,7 @@ class MainSceneViewController: UIViewController {
         EndisnearSaved.text = String(Items[endisnearIndex].save) + "원"
         EndisnearGoal.text = String(Items[endisnearIndex].price!) + "원"
         EndisnearProgressBar.progress = Float(Items[endisnearIndex].save) / Float(Items[endisnearIndex].price!)
-        EndisnearProgress.text = String(EndisnearProgressBar.progress * 100) + "%"
+        EndisnearProgress.text = String(Int((EndisnearProgressBar.progress * 100).rounded())) + "%"
     }
     
     @IBAction func DayiscommingRefresh(_ sender: Any) {
@@ -76,13 +76,16 @@ class MainSceneViewController: UIViewController {
         DayiscommingSaved.text = String(Items[dayiscommingIndex].save) + "원"
         DayiscommingGoal.text = String(Items[dayiscommingIndex].price!) + "원"
         DayiscommingProgressBar.progress = Float(Items[dayiscommingIndex].save) / Float(Items[dayiscommingIndex].price!)
-        DayiscommingProgress.text = String(DayiscommingProgressBar.progress * 100) + "%"
+        DayiscommingProgress.text = String(Int((DayiscommingProgressBar.progress * 100).rounded())) + "%"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        getNextFavorite()
+        getNextEndisnear()
+        getNextDayiscoming()
         RefreshFavoriteCell()
         RefreshEndisnearCell()
         RefreshDayiscommingCell()
