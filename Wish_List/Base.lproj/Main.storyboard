@@ -225,6 +225,14 @@
                                     <action selector="cancel:" destination="Ix5-Gs-Vxk" eventType="touchUpInside" id="32z-mJ-ys1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IxK-Mr-bOl">
+                                <rect key="frame" x="16" y="81" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="이미지"/>
+                                <connections>
+                                    <action selector="selectImage:" destination="Ix5-Gs-Vxk" eventType="touchUpInside" id="Phw-zC-CGa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="qOy-vU-FPi"/>
@@ -232,6 +240,7 @@
                     <connections>
                         <outlet property="deadline" destination="vJf-v1-Wye" id="ct3-BV-uza"/>
                         <outlet property="goal" destination="lrU-F6-h5p" id="udZ-tY-10S"/>
+                        <outlet property="image" destination="Ghf-Eh-ysb" id="Y1c-QZ-roQ"/>
                         <outlet property="memo" destination="BOc-wE-jpD" id="dHu-1Z-p1G"/>
                         <outlet property="name" destination="NTZ-MS-HLE" id="iSF-0h-cmi"/>
                     </connections>
