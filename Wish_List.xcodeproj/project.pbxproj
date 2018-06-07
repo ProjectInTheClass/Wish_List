@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36079DD120C91C96004D1E69 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36079DD020C91C96004D1E69 /* AddItemViewController.swift */; };
 		365004E720BFDE6A001599A2 /* MainSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365004E620BFDE6A001599A2 /* MainSceneViewController.swift */; };
 		36C6BA2020B7EEB0009E9753 /* MainSceneFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6BA1F20B7EEB0009E9753 /* MainSceneFunctions.swift */; };
 		EE4DB90520AEC8610015EDC4 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4DB90420AEC8610015EDC4 /* Functions.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		36079DD020C91C96004D1E69 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		365004E620BFDE6A001599A2 /* MainSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneViewController.swift; sourceTree = "<group>"; };
 		36C6BA1F20B7EEB0009E9753 /* MainSceneFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneFunctions.swift; sourceTree = "<group>"; };
 		EE4DB90420AEC8610015EDC4 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				EEBCE03320887C060033D5E7 /* ViewController.swift */,
 				EE4DB90420AEC8610015EDC4 /* Functions.swift */,
 				EEBCE03520887C060033D5E7 /* Main.storyboard */,
+				36079DD020C91C96004D1E69 /* AddItemViewController.swift */,
 				365004E620BFDE6A001599A2 /* MainSceneViewController.swift */,
 				EEBCE03820887C070033D5E7 /* Assets.xcassets */,
 				EEBCE03A20887C070033D5E7 /* LaunchScreen.storyboard */,
@@ -276,6 +279,7 @@
 				365004E720BFDE6A001599A2 /* MainSceneViewController.swift in Sources */,
 				EEBCE06420888B650033D5E7 /* WishItemsTableViewController.swift in Sources */,
 				EEBCE03420887C060033D5E7 /* ViewController.swift in Sources */,
+				36079DD120C91C96004D1E69 /* AddItemViewController.swift in Sources */,
 				EE4DB90520AEC8610015EDC4 /* Functions.swift in Sources */,
 				EEBCE03220887C060033D5E7 /* AppDelegate.swift in Sources */,
 			);
