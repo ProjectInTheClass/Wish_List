@@ -60,33 +60,57 @@ class Wish_Item {
 }
 
 func makeDummy() -> [Wish_Item] {
+    formatter.dateFormat = "yyyy/MM/dd"
     var Items:[Wish_Item]=[]
     var car = Wish_Item(name: "차",favorite: false,img: UIImage(named:"car"))
     car.price = 100000000
-    car.save = 90000000
+    car.save = 98000000
+    car.d_day = formatter.date(from: "2018/06/01")
     Items += [car]
     var notebook = Wish_Item(name: "노트북",favorite: true)
     notebook.price = 100000
     notebook.save = 10000
+    notebook.d_day = formatter.date(from: "2018/06/01")
     Items += [notebook]
     let borrow = Wish_Item(name: "빌린 돈",favorite: true)
-    borrow.save = 1000
-    borrow.price = 8700
+    borrow.price = 500000
+    borrow.save = 45000
+    borrow.d_day = formatter.date(from: "2018/07/01")
     Items += [borrow]
     let cloth = Wish_Item(name: "옷",favorite: false)
+    cloth.price = 200000
+    cloth.save = 10000
+    cloth.d_day = formatter.date(from: "2019/01/01")
     Items += [cloth]
     let myhome = Wish_Item(name: "내집",favorite: false)
+    myhome.price = 1000000000
+    myhome.save = 0
+    myhome.d_day = formatter.date(from: "2040/01/01")
     Items += [myhome]
     let month = Wish_Item(name: "월세",favorite: true)
+    month.price = 10000000
+    month.save = 300000
+    month.d_day = formatter.date(from: "2018/07/01")
     Items += [month]
     let tele = Wish_Item(name: "통화비",favorite: true)
+    tele.price = 50000
+    tele.save = 50000
+    tele.d_day = formatter.date(from: "2018/07/01")
     Items += [tele]
     let food = Wish_Item(name: "식비",favorite: false)
+    food.price = 300000
+    food.save = 100000
+    food.d_day = formatter.date(from: "2018/06/01")
     Items += [food]
     let goldbar = Wish_Item(name: "금괴",favorite: false)
+    goldbar.price = 1000000
+    goldbar.save = 0
+    goldbar.d_day = formatter.date(from: "2100/01/01")
     Items += [goldbar]
     return Items
 }
+
+let formatter = DateFormatter()
 
 var Items:[Wish_Item] = makeDummy()
 let no = Items.count

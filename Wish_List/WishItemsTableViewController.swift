@@ -66,13 +66,28 @@ class WishItemsCellView:UITableViewCell{
     @IBOutlet weak var ItemImg : UIImageView?
     @IBOutlet weak var Date : UILabel?
     @IBOutlet weak var Percentage : UILabel?
-    @IBOutlet weak var ProgressBar : UISlider?
+    @IBOutlet weak var ProgressBar : UIProgressView?
+    @IBOutlet weak var OuterProgressBar : UIProgressView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        ProgressBar?.minimumTrackTintColor = UIColor(displayP3Red: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
-        ProgressBar?.maximumTrackTintColor = UIColor(displayP3Red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0)
-        ProgressBar?.setThumbImage(UIImage(), for: .normal)
+        ProgressBar?.progressTintColor = UIColor(displayP3Red: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
+        ProgressBar?.transform = (ProgressBar?.transform.scaledBy(x: 1, y: 8))!
+        ProgressBar?.trackTintColor = UIColor.clear
+        OuterProgressBar?.transform = (OuterProgressBar?.transform.scaledBy(x: 1.02, y: 11))!
+        OuterProgressBar?.trackTintColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 1)
+        OuterProgressBar?.clipsToBounds = true
+        OuterProgressBar?.layer.cornerRadius = 8
+        OuterProgressBar?.layer.sublayers![1].cornerRadius = 8
+        OuterProgressBar?.subviews[1].clipsToBounds = true
+        OuterProgressBar?.layer.borderWidth = 0.1
+        OuterProgressBar?.layer.borderColor = UIColor.gray.cgColor
+        OuterProgressBar?.progress = 0
+        
+        ProgressBar?.clipsToBounds = true
+        ProgressBar?.layer.cornerRadius = 8
+        ProgressBar?.layer.sublayers![1].cornerRadius = 8
+        ProgressBar?.subviews[1].clipsToBounds = true
         ProgressBar?.isUserInteractionEnabled = false
     }
     
@@ -112,7 +127,7 @@ class WishItemsViewController : UIViewController{
             self.tableview?.reloadData()
         })
         let sortByDeadline = UIAlertAction(title:"마감일에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
-            //Items.sort(by: {$0.d_day! < $1.d_day!})
+            Items.sort(by: {$0.d_day! < $1.d_day!})
             self.tableview?.reloadData()
         })
         
@@ -152,11 +167,11 @@ extension WishItemsViewController: UITableViewDataSource{
             cell.Price?.text = (proj[indexPath.row].price?.description)! + "원"
         }
         cell.Money?.text = proj[indexPath.row].save.description + "원"
-        let percent:Float
+        var percent:Float
         
         percent = progress(lists:proj[indexPath.row])
         cell.Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
-        cell.ProgressBar?.setValue(percent, animated: true)
+        cell.ProgressBar?.progress = percent
         
         //if Items[indexPath.row].d_day == {
           //  cell.Date?.text = "기간 제한 없음"
