@@ -46,6 +46,7 @@ class MainSceneViewController: UIViewController {
         FavoriteSaved.text = String(Items[favoriteIndex].save) + "원"
         FavoriteGoal.text = String(Items[favoriteIndex].price!) + "원"
         FavoriteProgressBar.progress = Float(Items[favoriteIndex].save) / Float(Items[favoriteIndex].price!)
+        
         FavoriteProgress.text = String(Int((FavoriteProgressBar.progress * 100).rounded())) + "%"
     }
     

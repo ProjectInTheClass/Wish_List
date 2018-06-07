@@ -8,19 +8,18 @@
 
 import UIKit
 //progress bar 크기를 정함 (image view frame 크기를 변경시켜 크기 설정)
-func progress(origin :UIImageView, full :CGFloat, compare :CGFloat) -> CGFloat{
-    let percent:CGFloat
-    if full == 0 {
-        percent = 0
+func progress(lists:Wish_Item) -> Float {
+    var Percentage : Float
+    if lists.price != nil{
+        Percentage = Float(lists.save)/Float(lists.price!);
     }
-    else if full < compare{
-        percent = 1
+    else if lists.price == 0{
+        Percentage = 100;
     }
     else{
-        percent = compare / full
+        Percentage = 0;
     }
-    let new_width = origin.frame.size.width * percent
-    origin.frame.size = CGSize(width: new_width, height: origin.frame.size.height)
     
-    return percent
+    
+    return Percentage
 }
