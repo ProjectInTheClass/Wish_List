@@ -7,57 +7,6 @@
 //
 
 import UIKit
-/*
-class ProgressBarView: UIView{
-    var backgroundLayer : CALayer?
-    var progressLayer : CALayer?
-
-    func createPath(){
-        let x = self.frame.width
-        let y = self.frame.height
-    }
-    
-    func setup() {
-        let progressimage = UIImage(named: "green")
-        progressLayer = CALayer()
-        progressLayer?.frame = CGRect(x:self.frame.minX, y:self.frame.minY, width:self.frame.width,height:self.frame.height)
-        progressLayer?.contents = progressimage
-        //progressLayer?.cornerRadius = 40
-        /*progressLayer?.lineWidth = 5
-        progressLayer?.fillColor = nil
-        progressLayer?.strokeColor = UIColor.green.cgColor
-        progressLayer?.lineCap = kCALineCapRound
-        progressLayer?.strokeEnd = 0.0
-        */
-        let image = UIImage(named: "gauge")
-        backgroundLayer = CALayer()
-        //backgroundLayer?.contents = image
-        /*backgroundLayer.path =
-        backgroundLayer?.lineWidth = 7
-        backgroundLayer?.fillColor = nil
-        backgroundLayer?.strokeColor = UIColor.lightGray.cgColor
-    */
-        self.layer.addSublayer(backgroundLayer!)
-        self.layer.addSublayer(progressLayer!)
-        
-    }
-    
-    var progress: Float = 0 {
-        didSet(newValue){
-            //progressLayer?.strokeEnd = CGFloat(newValue)
-        }
-    }
-}
-*/
-class progressSlider:UISlider{
-    override func trackRect(forBounds bounds: CGRect)->CGRect{
-        var result = super.trackRect(forBounds: bounds)
-        //result.size.width = bounds.size.width
-        result.size.height = 15
-        result.origin.y = 8
-        return result
-    }
-}
 
 class WishItemsCellView:UITableViewCell{
     @IBOutlet weak var Itemname:UILabel?
@@ -65,47 +14,14 @@ class WishItemsCellView:UITableViewCell{
     @IBOutlet weak var Money : UILabel?
     @IBOutlet weak var ItemImg : UIImageView?
     @IBOutlet weak var Date : UILabel?
+    @IBOutlet weak var BarFrame : UIImageView?
+    @IBOutlet weak var Bar : UIImageView?
     @IBOutlet weak var Percentage : UILabel?
-    @IBOutlet weak var ProgressBar : UIProgressView?
-    @IBOutlet weak var OuterProgressBar : UIProgressView?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        ProgressBar?.progressTintColor = UIColor(displayP3Red: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
-        ProgressBar?.transform = (ProgressBar?.transform.scaledBy(x: 1, y: 8))!
-        ProgressBar?.trackTintColor = UIColor.clear
-        OuterProgressBar?.transform = (OuterProgressBar?.transform.scaledBy(x: 1.02, y: 11))!
-        OuterProgressBar?.trackTintColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 1)
-        OuterProgressBar?.clipsToBounds = true
-        OuterProgressBar?.layer.cornerRadius = 8
-        OuterProgressBar?.layer.sublayers![1].cornerRadius = 8
-        OuterProgressBar?.subviews[1].clipsToBounds = true
-        OuterProgressBar?.layer.borderWidth = 0.1
-        OuterProgressBar?.layer.borderColor = UIColor.gray.cgColor
-        OuterProgressBar?.progress = 0
-        
-        ProgressBar?.clipsToBounds = true
-        ProgressBar?.layer.cornerRadius = 8
-        ProgressBar?.layer.sublayers![1].cornerRadius = 8
-        ProgressBar?.subviews[1].clipsToBounds = true
-        ProgressBar?.isUserInteractionEnabled = false
-    }
-    
-    override func prepareForReuse() {
-        
-        super.prepareForReuse()
-        Itemname?.text = nil
-        Price?.text = nil
-        Money?.text = nil
-        ItemImg?.image = nil
-        Percentage?.text = nil
-        
-    }
 }
 class WishItemsViewController : UIViewController{
     @IBOutlet weak var tableview: UITableView?
-    @IBOutlet weak var AddButton : UIButton?
     var proj:[Wish_Item] = Items        //저장된 class list(Items = test list)를 proj가 참조
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,25 +70,54 @@ extension WishItemsViewController: UITableViewDataSource{
         return 1
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        //let list:[String] = ["즐겨찾기","달성임박","마감임박","전체"]
+        
+        //return list[section]
+        return "전체"
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 첫 번째 인자로 등록한 identifier, cell은 as 키워드로 앞서 만든 custom cell class화 해준다.
         let cell = tableview?.dequeueReusableCell(withIdentifier: "WishItems", for: indexPath as IndexPath) as! WishItemsCellView // 위 작업을 마치면 커스텀 클래스의 outlet을 사용할 수 있다.
         cell.Itemname?.text = proj[indexPath.row].name
         cell.ItemImg?.image = proj[indexPath.row].img
+        cell.BarFrame?.image = UIImage(named: "gauge")
         
         if proj[indexPath.row].price == nil {
             cell.Price?.text = "가격 미상"
         }
         else{
-            cell.Price?.text = (proj[indexPath.row].price?.description)! + "원"
+            cell.Price?.text = proj[indexPath.row].price?.description
         }
-        cell.Money?.text = proj[indexPath.row].save.description + "원"
-        var percent:Float
+        cell.Money?.text = proj[indexPath.row].save.description
+        /*
+        let percent:CGFloat
+        if proj[indexPath.row].price != nil{
+            let pric:CGFloat = CGFloat(proj[indexPath.row].price!)
+            percent = CGFloat(proj[indexPath.row].save) / pric
+        }
+        else{
+            percent = 0
+        }
+        let new_width = (cell.Bar?.frame.size.width)! * percent
+        cell.Bar?.frame.size = CGSize(width: new_width, height: (cell.Bar?.frame.size.height)!)
+         */
         
-        percent = progress(lists:proj[indexPath.row])
-        cell.Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
-        cell.ProgressBar?.progress = percent
+        var prog: CGFloat
+        if proj[indexPath.row].price != nil{
+            let pric:CGFloat = CGFloat(proj[indexPath.row].price!)
+            prog = progress(origin: (cell.Bar)!,full: pric,compare: CGFloat(proj[indexPath.row].save))
+            prog = prog * 100
+            cell.Percentage?.text = prog.description + "%"
+        }
+        else{
+            prog = progress(origin: (cell.Bar)!,full: 0,compare: CGFloat(proj[indexPath.row].save))
+            prog = prog * 100
+            cell.Percentage?.text = prog.description + "%"
+        }
         
+        cell.Bar?.image = UIImage(named: "green")
         //if Items[indexPath.row].d_day == {
           //  cell.Date?.text = "기간 제한 없음"
         //}
