@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var goal: UITextField!
@@ -59,6 +59,9 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         image.image = UIImage(named: "noimg")
         
         imagePicker.delegate = self
+        name.delegate = self
+        goal.delegate = self
+        memo.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -67,6 +70,17 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
     
 
     /*
