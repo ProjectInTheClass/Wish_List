@@ -24,7 +24,7 @@ class AddItemViewController: UIViewController {
         let temp = Wish_Item(name: name.text!, favorite: false)
         temp.price = Int(goal.text!)
         temp.d_day = deadline.date as Date
-        temp.favorite = true
+        temp.favorite = false
         temp.memo = memo.text!
         Items.append(temp)
         self.dismiss(animated: true, completion: nil)
