@@ -70,6 +70,8 @@ func makeDummy() -> [Wish_Item] {
     notebook.save = 10000
     Items += [notebook]
     let borrow = Wish_Item(name: "빌린 돈",favorite: true)
+    borrow.save = 1000
+    borrow.price = 8700
     Items += [borrow]
     let cloth = Wish_Item(name: "옷",favorite: false)
     Items += [cloth]
