@@ -105,7 +105,8 @@ class WishItemsCellView:UITableViewCell{
 class WishItemsViewController : UIViewController{
     @IBOutlet weak var tableview: UITableView?
     @IBOutlet weak var AddButton : UIButton?
-    var proj:[Wish_Item] = Items        //저장된 class list(Items = test list)를 proj가 참조
+    //var proj:[Wish_Item] = Items        //저장된 class list(Items = test list)를 proj가 참조
+    var tempItem:Wish_Item? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,20 +131,38 @@ class WishItemsViewController : UIViewController{
             Items.sort(by: {$0.d_day! < $1.d_day!})
             self.tableview?.reloadData()
         })
+        let sortByPrice = UIAlertAction(title:"목표금액에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
+            Items.sort(by: {$0.price != nil && ($1.price == nil || $0.price! < $1.price!)})
+            self.tableview?.reloadData()
+        })
+        let sortByProgress = UIAlertAction(title:"달성도에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
+            Items.sort(by: {$0.price != nil && ($1.price == nil || Double($0.save) / Double($0.price!) > Double($1.save) / Double($1.price!))})
+            self.tableview?.reloadData()
+        })
+        
         
         selectSortMethod.addAction(sortByName)
         selectSortMethod.addAction(sortByDeadline)
+        selectSortMethod.addAction(sortByPrice)
+        selectSortMethod.addAction(sortByProgress)
         
         self.present(selectSortMethod, animated:true, completion:nil)
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        /*if let tmpItem = tempItem {
+            proj.append(tmpItem)
+            self.tableview?.reloadData()
+        }*/
+        self.tableview?.reloadData()
+    }
 }
 
 extension WishItemsViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return proj.count
+        //return proj.count
+        return Items.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -157,19 +176,19 @@ extension WishItemsViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 첫 번째 인자로 등록한 identifier, cell은 as 키워드로 앞서 만든 custom cell class화 해준다.
         let cell = tableview?.dequeueReusableCell(withIdentifier: "WishItems", for: indexPath as IndexPath) as! WishItemsCellView // 위 작업을 마치면 커스텀 클래스의 outlet을 사용할 수 있다.
-        cell.Itemname?.text = proj[indexPath.row].name
-        cell.ItemImg?.image = proj[indexPath.row].img
+        cell.Itemname?.text = Items[indexPath.row].name
+        cell.ItemImg?.image = Items[indexPath.row].img
         
-        if proj[indexPath.row].price == nil {
+        if Items[indexPath.row].price == nil {
             cell.Price?.text = "가격 미상"
         }
         else{
-            cell.Price?.text = (proj[indexPath.row].price?.description)! + "원"
+            cell.Price?.text = (Items[indexPath.row].price?.description)! + "원"
         }
-        cell.Money?.text = proj[indexPath.row].save.description + "원"
+        cell.Money?.text = Items[indexPath.row].save.description + "원"
         var percent:Float
         
-        percent = progress(lists:proj[indexPath.row])
+        percent = progress(lists:Items[indexPath.row])
         cell.Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
         cell.ProgressBar?.progress = percent
         

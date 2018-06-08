@@ -18,6 +18,8 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     let imagePicker = UIImagePickerController()
     
+    //var destVC = WishItemsViewController()
+    
     @IBAction func selectImage(_ sender: Any) {
         //imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
@@ -44,13 +46,20 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func confirm(_ sender: Any) {
+        //print("pppp")
         let temp = Wish_Item(name: name.text!, favorite: false)
-        temp.price = Int(goal.text!)
+        if let tmpPrice = goal.text {
+            temp.price = Int(tmpPrice)
+        } else {
+            temp.price = nil
+        }
         temp.d_day = deadline.date as Date
         temp.favorite = false
         temp.memo = memo.text!
         temp.img = image.image!
+        
         Items.append(temp)
+        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -64,6 +73,18 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         memo.delegate = self
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        /*print("ppap")
+        let destVC = segue.destination as! WishItemsViewController
+        if let tmp = temp {
+            destVC.tempItem = tmp
+            print("aaa")
+        } else {
+            destVC.tempItem = nil
+            print("bbb")
+        }*/
     }
 
     override func didReceiveMemoryWarning() {
