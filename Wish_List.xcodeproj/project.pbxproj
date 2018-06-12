@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36079DD720C933D1004D1E69 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36079DD620C933D1004D1E69 /* AddItemViewController.swift */; };
 		365004E720BFDE6A001599A2 /* MainSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365004E620BFDE6A001599A2 /* MainSceneViewController.swift */; };
 		36C6BA2020B7EEB0009E9753 /* MainSceneFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6BA1F20B7EEB0009E9753 /* MainSceneFunctions.swift */; };
 		EE4DB90520AEC8610015EDC4 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4DB90420AEC8610015EDC4 /* Functions.swift */; };
@@ -20,6 +19,8 @@
 		EEBCE05220887C070033D5E7 /* Wish_ListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBCE05120887C070033D5E7 /* Wish_ListUITests.swift */; };
 		EEBCE06020887C670033D5E7 /* classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBCE05F20887C670033D5E7 /* classes.swift */; };
 		EEBCE06420888B650033D5E7 /* WishItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBCE06320888B650033D5E7 /* WishItemsTableViewController.swift */; };
+		EED5E8AD20C935A4001B5F6A /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED5E8AC20C935A4001B5F6A /* AddItemViewController.swift */; };
+		EED5E8AF20CA6517001B5F6A /* Detail_Info_Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED5E8AE20CA6517001B5F6A /* Detail_Info_Controller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		36079DD620C933D1004D1E69 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddItemViewController.swift; path = /Users/ljh/Documents/GitHub/Wish_List/Wish_List/AddItemViewController.swift; sourceTree = "<absolute>"; };
 		365004E620BFDE6A001599A2 /* MainSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneViewController.swift; sourceTree = "<group>"; };
 		36C6BA1F20B7EEB0009E9753 /* MainSceneFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneFunctions.swift; sourceTree = "<group>"; };
 		EE4DB90420AEC8610015EDC4 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
@@ -59,6 +59,8 @@
 		EEBCE05320887C070033D5E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEBCE05F20887C670033D5E7 /* classes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = classes.swift; sourceTree = "<group>"; };
 		EEBCE06320888B650033D5E7 /* WishItemsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishItemsTableViewController.swift; sourceTree = "<group>"; };
+		EED5E8AC20C935A4001B5F6A /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		EED5E8AE20CA6517001B5F6A /* Detail_Info_Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail_Info_Controller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,18 +111,19 @@
 		EEBCE03020887C060033D5E7 /* Wish_List */ = {
 			isa = PBXGroup;
 			children = (
-				36079DD620C933D1004D1E69 /* AddItemViewController.swift */,
+				EED5E8AC20C935A4001B5F6A /* AddItemViewController.swift */,
 				EEBCE03120887C060033D5E7 /* AppDelegate.swift */,
 				EEBCE05F20887C670033D5E7 /* classes.swift */,
 				EEBCE03320887C060033D5E7 /* ViewController.swift */,
-				EE4DB90420AEC8610015EDC4 /* Functions.swift */,
 				EEBCE03520887C060033D5E7 /* Main.storyboard */,
-				365004E620BFDE6A001599A2 /* MainSceneViewController.swift */,
 				EEBCE03820887C070033D5E7 /* Assets.xcassets */,
 				EEBCE03A20887C070033D5E7 /* LaunchScreen.storyboard */,
 				EEBCE03D20887C070033D5E7 /* Info.plist */,
 				EEBCE06320888B650033D5E7 /* WishItemsTableViewController.swift */,
+				EE4DB90420AEC8610015EDC4 /* Functions.swift */,
+				365004E620BFDE6A001599A2 /* MainSceneViewController.swift */,
 				36C6BA1F20B7EEB0009E9753 /* MainSceneFunctions.swift */,
+				EED5E8AE20CA6517001B5F6A /* Detail_Info_Controller.swift */,
 			);
 			path = Wish_List;
 			sourceTree = "<group>";
@@ -275,11 +278,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEBCE06020887C670033D5E7 /* classes.swift in Sources */,
+				EED5E8AF20CA6517001B5F6A /* Detail_Info_Controller.swift in Sources */,
 				36C6BA2020B7EEB0009E9753 /* MainSceneFunctions.swift in Sources */,
 				365004E720BFDE6A001599A2 /* MainSceneViewController.swift in Sources */,
 				EEBCE06420888B650033D5E7 /* WishItemsTableViewController.swift in Sources */,
 				EEBCE03420887C060033D5E7 /* ViewController.swift in Sources */,
-				36079DD720C933D1004D1E69 /* AddItemViewController.swift in Sources */,
+				EED5E8AD20C935A4001B5F6A /* AddItemViewController.swift in Sources */,
 				EE4DB90520AEC8610015EDC4 /* Functions.swift in Sources */,
 				EEBCE03220887C060033D5E7 /* AppDelegate.swift in Sources */,
 			);

@@ -16,6 +16,7 @@ class MainSceneViewController: UIViewController {
     @IBOutlet weak var FavoriteSaved: UILabel!
     @IBOutlet weak var FavoriteGoal: UILabel!
     @IBOutlet weak var FavoriteProgressBar: UIProgressView!
+    @IBOutlet weak var OuterFavoriteProgressBar: UIProgressView!
     @IBOutlet weak var FavoriteProgress: UILabel!
 
     @IBOutlet weak var EndisnearImage: UIImageView!
@@ -24,6 +25,7 @@ class MainSceneViewController: UIViewController {
     @IBOutlet weak var EndisnearSaved: UILabel!
     @IBOutlet weak var EndisnearGoal: UILabel!
     @IBOutlet weak var EndisnearProgressBar: UIProgressView!
+    @IBOutlet weak var OuterEndisnearProgressBar: UIProgressView!
     @IBOutlet weak var EndisnearProgress: UILabel!
     
     @IBOutlet weak var DayiscommingImage: UIImageView!
@@ -32,6 +34,7 @@ class MainSceneViewController: UIViewController {
     @IBOutlet weak var DayiscommingSaved: UILabel!
     @IBOutlet weak var DayiscommingGoal: UILabel!
     @IBOutlet weak var DayiscommingProgressBar: UIProgressView!
+    @IBOutlet weak var OuterDayiscommingProgressBar: UIProgressView!
     @IBOutlet weak var DayiscommingProgress: UILabel!
     
     @IBAction func FavoriteRefresh(_ sender: Any) {
@@ -41,6 +44,7 @@ class MainSceneViewController: UIViewController {
     
     func RefreshFavoriteCell () {
         FavoriteImage.image = Items[favoriteIndex].img
+        
         FavoriteName.text = Items[favoriteIndex].name
         FavoriteDeadline.text = formatter.string(from: Items[favoriteIndex].d_day!)
         FavoriteSaved.text = String(Items[favoriteIndex].save) + "원"
@@ -82,7 +86,12 @@ class MainSceneViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        progressDesign(ProgressBar: DayiscommingProgressBar,OuterProgressBar: OuterDayiscommingProgressBar)
+        progressDesign(ProgressBar: EndisnearProgressBar,OuterProgressBar: OuterEndisnearProgressBar)
+        progressDesign(ProgressBar: FavoriteProgressBar,OuterProgressBar: OuterFavoriteProgressBar)
+        ImgDesign(Imgview: FavoriteImage)
+        ImgDesign(Imgview: EndisnearImage)
+        ImgDesign(Imgview: DayiscommingImage)
         // Do any additional setup after loading the view.
         getNextFavorite()
         getNextEndisnear()
@@ -97,7 +106,35 @@ class MainSceneViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func progressDesign(ProgressBar:UIProgressView?,OuterProgressBar:UIProgressView?){
+        
+        ProgressBar?.progressTintColor = UIColor(displayP3Red: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
+        ProgressBar?.transform = (ProgressBar?.transform.scaledBy(x: 1, y: 7))!
+        ProgressBar?.trackTintColor = UIColor.clear
+        OuterProgressBar?.transform = (OuterProgressBar?.transform.scaledBy(x: 1.01, y: 10))!
+        OuterProgressBar?.trackTintColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 1)
+        OuterProgressBar?.clipsToBounds = true
+        OuterProgressBar?.layer.cornerRadius = 7
+        OuterProgressBar?.layer.sublayers![1].cornerRadius = 7
+        OuterProgressBar?.subviews[1].clipsToBounds = true
+        OuterProgressBar?.layer.borderWidth = 0.1
+        OuterProgressBar?.layer.borderColor = UIColor.gray.cgColor
+        OuterProgressBar?.progress = 0
+        
+        ProgressBar?.clipsToBounds = true
+        ProgressBar?.layer.cornerRadius = 7
+        ProgressBar?.layer.sublayers![1].cornerRadius = 7
+        ProgressBar?.subviews[1].clipsToBounds = true
+        ProgressBar?.isUserInteractionEnabled = false
+    }
 
+    func ImgDesign(Imgview : UIImageView){
+        Imgview.layer.borderWidth = 1
+        Imgview.layer.masksToBounds = false
+        Imgview.layer.borderColor = UIColor.black.cgColor
+        Imgview.layer.cornerRadius = (Imgview.frame.height) / 2
+        Imgview.clipsToBounds = true
+    }
     /*
     // MARK: - Navigation
 

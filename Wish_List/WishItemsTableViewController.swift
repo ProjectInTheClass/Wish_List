@@ -72,21 +72,21 @@ class WishItemsCellView:UITableViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
         ProgressBar?.progressTintColor = UIColor(displayP3Red: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
-        ProgressBar?.transform = (ProgressBar?.transform.scaledBy(x: 1, y: 8))!
+        ProgressBar?.transform = (ProgressBar?.transform.scaledBy(x: 1, y: 7))!
         ProgressBar?.trackTintColor = UIColor.clear
-        OuterProgressBar?.transform = (OuterProgressBar?.transform.scaledBy(x: 1.02, y: 11))!
+        OuterProgressBar?.transform = (OuterProgressBar?.transform.scaledBy(x: 1.01, y: 10))!
         OuterProgressBar?.trackTintColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 1)
         OuterProgressBar?.clipsToBounds = true
-        OuterProgressBar?.layer.cornerRadius = 8
-        OuterProgressBar?.layer.sublayers![1].cornerRadius = 8
+        OuterProgressBar?.layer.cornerRadius = 7
+        OuterProgressBar?.layer.sublayers![1].cornerRadius = 7
         OuterProgressBar?.subviews[1].clipsToBounds = true
         OuterProgressBar?.layer.borderWidth = 0.1
         OuterProgressBar?.layer.borderColor = UIColor.gray.cgColor
         OuterProgressBar?.progress = 0
         
         ProgressBar?.clipsToBounds = true
-        ProgressBar?.layer.cornerRadius = 8
-        ProgressBar?.layer.sublayers![1].cornerRadius = 8
+        ProgressBar?.layer.cornerRadius = 7
+        ProgressBar?.layer.sublayers![1].cornerRadius = 7
         ProgressBar?.subviews[1].clipsToBounds = true
         ProgressBar?.isUserInteractionEnabled = false
     }
@@ -107,6 +107,7 @@ class WishItemsViewController : UIViewController{
     @IBOutlet weak var AddButton : UIButton?
     //var proj:[Wish_Item] = Items        //저장된 class list(Items = test list)를 proj가 참조
     var tempItem:Wish_Item? = nil
+    let Bg = UIImageView(image:UIImage(named: "background"))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,6 +116,8 @@ class WishItemsViewController : UIViewController{
         tableview?.rowHeight = 106
         tableview?.dataSource = self
         tableview?.delegate = self
+        Bg.contentMode = .scaleToFill
+        tableview?.backgroundView = Bg
     }
     
     override func didReceiveMemoryWarning() {
@@ -123,10 +126,6 @@ class WishItemsViewController : UIViewController{
     }
     @IBAction func sortItemList(_ sender: Any) {
         let selectSortMethod = UIAlertController(title: "목록 정렬 방식", message: "", preferredStyle: .actionSheet)
-        let sortByName = UIAlertAction(title: "이름에 따라 정렬", style: .default, handler: {(action:UIAlertAction) -> Void in
-            Items.sort(by: {$0.name < $1.name})
-            self.tableview?.reloadData()
-        })
         let sortByDeadline = UIAlertAction(title:"마감일에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
             Items.sort(by: {$0.d_day! < $1.d_day!})
             self.tableview?.reloadData()
@@ -140,8 +139,6 @@ class WishItemsViewController : UIViewController{
             self.tableview?.reloadData()
         })
         
-        
-        selectSortMethod.addAction(sortByName)
         selectSortMethod.addAction(sortByDeadline)
         selectSortMethod.addAction(sortByPrice)
         selectSortMethod.addAction(sortByProgress)
@@ -175,9 +172,17 @@ extension WishItemsViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 첫 번째 인자로 등록한 identifier, cell은 as 키워드로 앞서 만든 custom cell class화 해준다.
+        let Bg = UIImageView(image:UIImage(named: "background"))
+        Bg.contentMode = .scaleToFill
         let cell = tableview?.dequeueReusableCell(withIdentifier: "WishItems", for: indexPath as IndexPath) as! WishItemsCellView // 위 작업을 마치면 커스텀 클래스의 outlet을 사용할 수 있다.
+        cell.selectedBackgroundView = Bg
         cell.Itemname?.text = Items[indexPath.row].name
         cell.ItemImg?.image = Items[indexPath.row].img
+        cell.ItemImg?.layer.borderWidth = 1
+        cell.ItemImg?.layer.masksToBounds = false
+        cell.ItemImg?.layer.borderColor = UIColor.black.cgColor
+        cell.ItemImg?.layer.cornerRadius = (cell.ItemImg?.frame.height)! / 2
+        cell.ItemImg?.clipsToBounds = true
         
         if Items[indexPath.row].price == nil {
             cell.Price?.text = "가격 미상"
@@ -196,7 +201,7 @@ extension WishItemsViewController: UITableViewDataSource{
           //  cell.Date?.text = "기간 제한 없음"
         //}
         //else{
-          //  cell.Date?.text = Items[indexPath.row].d_day?.description
+            cell.Date?.text = formatter.string(from: Items[indexPath.row].d_day!)
         //}
         
         return cell
