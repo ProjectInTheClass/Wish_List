@@ -49,14 +49,8 @@ class ProgressBarView: UIView{
     }
 }
 */
-class progressSlider:UISlider{
-    override func trackRect(forBounds bounds: CGRect)->CGRect{
-        var result = super.trackRect(forBounds: bounds)
-        //result.size.width = bounds.size.width
-        result.size.height = 15
-        result.origin.y = 8
-        return result
-    }
+protocol CellButton : class{
+    func TapButton(_ sender: WishItemsCellView)
 }
 
 class WishItemsCellView:UITableViewCell{
@@ -68,6 +62,14 @@ class WishItemsCellView:UITableViewCell{
     @IBOutlet weak var Percentage : UILabel?
     @IBOutlet weak var ProgressBar : UIProgressView?
     @IBOutlet weak var OuterProgressBar : UIProgressView?
+    @IBOutlet weak var D_day : UILabel?
+    @IBOutlet weak var Favorite : UIButton?
+    
+    weak var delegate: CellButton?
+    
+    @IBAction func ButtonTapped(_ sender: UIButton){
+        delegate?.TapButton(self)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -103,11 +105,15 @@ class WishItemsCellView:UITableViewCell{
     }
 }
 class WishItemsViewController : UIViewController{
+
+    
     @IBOutlet weak var tableview: UITableView?
     @IBOutlet weak var AddButton : UIButton?
     //var proj:[Wish_Item] = Items        //저장된 class list(Items = test list)를 proj가 참조
     var tempItem:Wish_Item? = nil
     let Bg = UIImageView(image:UIImage(named: "background"))
+    let fav_img = UIImage(named: "favorite")
+    let favn_img = UIImage(named: "favorite_not")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,7 +161,19 @@ class WishItemsViewController : UIViewController{
     }
 }
 
-extension WishItemsViewController: UITableViewDataSource{
+extension WishItemsViewController: UITableViewDataSource, CellButton{
+    func TapButton(_ sender: WishItemsCellView) {
+        let tappedIndexPath = tableview?.indexPath(for: sender)
+        if Items[(tappedIndexPath?.row)!].favorite == false{
+            Items[(tappedIndexPath?.row)!].favorite = true
+            sender.Favorite?.setImage(fav_img, for: .normal)
+        }
+        else{
+            Items[(tappedIndexPath?.row)!].favorite = false
+            sender.Favorite?.setImage(favn_img, for: .normal)
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return proj.count
@@ -169,12 +187,27 @@ extension WishItemsViewController: UITableViewDataSource{
         //return 4
         return 1
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nextVC = segue.destination as? DetailViewController
+        {
+            let selectedIndex = self.tableview?.indexPathForSelectedRow?.row
+            
+            nextVC.data = Items[selectedIndex!]
+        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 첫 번째 인자로 등록한 identifier, cell은 as 키워드로 앞서 만든 custom cell class화 해준다.
         let Bg = UIImageView(image:UIImage(named: "background"))
         Bg.contentMode = .scaleToFill
         let cell = tableview?.dequeueReusableCell(withIdentifier: "WishItems", for: indexPath as IndexPath) as! WishItemsCellView // 위 작업을 마치면 커스텀 클래스의 outlet을 사용할 수 있다.
+        cell.delegate = self
+        if Items[indexPath.row].favorite == true{
+            cell.Favorite?.setImage(fav_img, for: .normal)
+        }
+        else{
+            cell.Favorite?.setImage(favn_img, for: .normal)
+        }
         cell.selectedBackgroundView = Bg
         cell.Itemname?.text = Items[indexPath.row].name
         cell.ItemImg?.image = Items[indexPath.row].img
@@ -201,6 +234,15 @@ extension WishItemsViewController: UITableViewDataSource{
           //  cell.Date?.text = "기간 제한 없음"
         //}
         //else{
+            var interval : Double
+        var s = "-"
+            interval = (Items[indexPath.row].d_day?.timeIntervalSinceNow)!
+            interval = interval / 86400
+        if interval < 0 {
+            interval = interval * -1
+            s = "+"
+        }
+            cell.D_day?.text = "D " + s + " " + (Int(interval)).description
             cell.Date?.text = formatter.string(from: Items[indexPath.row].d_day!)
         //}
         

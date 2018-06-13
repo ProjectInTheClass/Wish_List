@@ -66,7 +66,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         image.image = UIImage(named: "noimg")
-        
+        ImgDesign(Imgview: image)
         imagePicker.delegate = self
         name.delegate = self
         goal.delegate = self
@@ -113,5 +113,11 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         // Pass the selected object to the new view controller.
     }
     */
-
+    func ImgDesign(Imgview : UIImageView){
+        Imgview.layer.borderWidth = 1
+        Imgview.layer.masksToBounds = false
+        Imgview.layer.borderColor = UIColor.black.cgColor
+        Imgview.layer.cornerRadius = (Imgview.frame.height) / 2
+        Imgview.clipsToBounds = true
+    }
 }

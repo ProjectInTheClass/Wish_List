@@ -33,7 +33,11 @@ class Wish_Item {
     var favorite : Bool         //즐겨찾기
     var endisnear : Bool        //달성임박
     var dayiscomming : Bool     //마감임박
+    var money_monthly : Int?    //정기저축금
     var memo : String?           //이걸 위해 돈을 모으는 나를 향해 계획을 세운 내가 할 말
+    var finishflag : Bool
+    var endflag : Bool          /*완료 및 만기 flag. 리스트 정렬 시 맨 아래에 위치.
+                                다른 모든 list관리에서 제외.*/
     
     init(name :String,favorite:Bool){
         self.name = name
@@ -41,7 +45,10 @@ class Wish_Item {
         self.favorite = favorite
         self.endisnear = false
         self.dayiscomming = false
+        self.finishflag = false
+        self.endflag = false
         self.img = UIImage(named:"noimg")
+        self.money_monthly = 0
         //self.d_day = ""
     }
     
@@ -52,6 +59,9 @@ class Wish_Item {
         self.endisnear = false
         self.dayiscomming = false
         self.img = img
+        self.finishflag = false
+        self.endflag = false
+        self.money_monthly = 0
     }
     func loadpicture(img: UIImage?) {
         

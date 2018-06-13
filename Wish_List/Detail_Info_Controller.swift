@@ -18,3 +18,106 @@ import UIKit
 //변동 내역 누르면 따로 detail view 창 띄워서 볼 수 있게 하는건?
 
 //내역 삭제는 불가. 다만 내용은 변경할 수 있음(액수 변경은 불가. 내역은 가능, 날짜는?)
+class DetailViewController : UIViewController{
+    var data:Wish_Item?;
+    @IBOutlet weak var IMG : UIImageView?
+    @IBOutlet weak var Money: UILabel?  //남은 돈
+    @IBOutlet weak var MPD: UILabel?    //Money per day
+    @IBOutlet weak var SPM: UILabel?    //save per month
+    @IBOutlet weak var D_day : UILabel? //d-day
+    @IBOutlet weak var E_day : UILabel? //expire day
+    @IBOutlet weak var Save : UILabel?  //넣은 돈
+    @IBOutlet weak var Price : UILabel?
+    @IBOutlet weak var Percentage : UILabel?
+    @IBOutlet weak var ProgressBar : UIProgressView?
+    @IBOutlet weak var OuterProgressBar : UIProgressView?
+    @IBOutlet weak var MoneyIn : UIButton?
+    @IBOutlet weak var MoneyOut : UIButton?
+    @IBOutlet weak var Memo : UILabel?
+    @IBOutlet weak var Lists : UITableView?
+    
+    override func viewDidLoad() {
+        title = data?.name
+        super.viewDidLoad()
+        progressDesign(ProgressBar: ProgressBar,OuterProgressBar: OuterProgressBar)
+        ImgDesign(Imgview: IMG!)
+        let money : Int
+        if data?.price != nil{
+            money = (data?.price)! - (data?.save)!
+            Money?.text = money.description + "원"
+        }
+        else{
+            money = 0
+            Money?.text = "가격 미상"
+        }
+        var interval : Double
+        IMG?.image = data?.img
+        
+        if data?.d_day != nil{
+            interval = (data?.d_day?.timeIntervalSinceNow)!
+            interval = interval / 86400
+            if interval < 0 {
+                MPD?.text = "기한 만료됨"
+            }
+            else{
+                MPD?.text = (Int(Double(money)/interval)).description + "원"
+            }
+            var s = "-"
+            if interval < 0 {
+                interval = interval * -1
+                s = "+"
+            }
+            D_day?.text = "D " + s + " " + (Int(interval)).description
+        }
+        else{
+            MPD?.text = "날짜 미정"
+            D_day?.text = "날짜 미정"
+        }
+        SPM?.text = (data?.money_monthly?.description)! + "원"
+        
+        E_day?.text = formatter.string(from: (data?.d_day!)!)
+        Save?.text = data?.save.description
+        if data?.price != nil{
+            Price?.text = data?.price?.description
+        }
+        else{
+            Price?.text = "가격 미상"
+        }
+        let percent = progress(lists:data!)
+        Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
+        ProgressBar?.progress = percent
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    func progressDesign(ProgressBar:UIProgressView?,OuterProgressBar:UIProgressView?){
+        
+        ProgressBar?.progressTintColor = UIColor(displayP3Red: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
+        ProgressBar?.transform = (ProgressBar?.transform.scaledBy(x: 1, y: 7))!
+        ProgressBar?.trackTintColor = UIColor.clear
+        OuterProgressBar?.transform = (OuterProgressBar?.transform.scaledBy(x: 1.01, y: 10))!
+        OuterProgressBar?.trackTintColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 1)
+        OuterProgressBar?.clipsToBounds = true
+        OuterProgressBar?.layer.cornerRadius = 7
+        OuterProgressBar?.layer.sublayers![1].cornerRadius = 7
+        OuterProgressBar?.subviews[1].clipsToBounds = true
+        OuterProgressBar?.layer.borderWidth = 0.1
+        OuterProgressBar?.layer.borderColor = UIColor.gray.cgColor
+        OuterProgressBar?.progress = 0
+        
+        ProgressBar?.clipsToBounds = true
+        ProgressBar?.layer.cornerRadius = 7
+        ProgressBar?.layer.sublayers![1].cornerRadius = 7
+        ProgressBar?.subviews[1].clipsToBounds = true
+        ProgressBar?.isUserInteractionEnabled = false
+    }
+    
+    func ImgDesign(Imgview : UIImageView){
+        Imgview.layer.borderWidth = 1
+        Imgview.layer.masksToBounds = false
+        Imgview.layer.borderColor = UIColor.black.cgColor
+        Imgview.layer.cornerRadius = (Imgview.frame.height) / 2
+        Imgview.clipsToBounds = true
+    }
+}
