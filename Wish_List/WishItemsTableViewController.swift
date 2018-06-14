@@ -124,6 +124,8 @@ class WishItemsViewController : UIViewController{
         tableview?.delegate = self
         Bg.contentMode = .scaleToFill
         tableview?.backgroundView = Bg
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -173,7 +175,7 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
             sender.Favorite?.setImage(favn_img, for: .normal)
         }
     }
-    
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return proj.count
@@ -193,6 +195,12 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
             let selectedIndex = self.tableview?.indexPathForSelectedRow?.row
             
             nextVC.data = Items[selectedIndex!]
+        }
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete{
+        Items.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
     }
     
