@@ -23,18 +23,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmp-Jq-yIC">
-<<<<<<< HEAD
-                                <rect key="frame" x="232" y="311" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="출금"/>
-                                <connections>
-                                    <action selector="ClickMinus:" destination="ebc-ey-gZQ" eventType="touchUpInside" id="KXw-bL-Wlw"/>
-                                </connections>
-=======
                                 <rect key="frame" x="226" y="311" width="43" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="돈 넣기"/>
->>>>>>> d2c1c3d9a32aecfc2a8fc41ba9d7c2c47080687f
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="날짜" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ydi-m5-LFO">
                                 <rect key="frame" x="268" y="245" width="91" height="18"/>
@@ -115,18 +106,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovR-8g-vbh">
-<<<<<<< HEAD
-                                <rect key="frame" x="321" y="311" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="입금"/>
-                                <connections>
-                                    <action selector="ClickAdd:" destination="ebc-ey-gZQ" eventType="touchUpInside" id="BQs-0i-uJi"/>
-                                </connections>
-=======
                                 <rect key="frame" x="315" y="311" width="43" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="돈 빼기"/>
->>>>>>> d2c1c3d9a32aecfc2a8fc41ba9d7c2c47080687f
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WK6-pZ-qdA">
                                 <rect key="frame" x="253" y="136" width="106" height="21"/>
