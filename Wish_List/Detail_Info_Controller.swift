@@ -35,6 +35,12 @@ class DetailViewController : UIViewController{
     @IBOutlet weak var MoneyOut : UIButton?
     @IBOutlet weak var Memo : UILabel?
     @IBOutlet weak var Lists : UITableView?
+    @IBOutlet weak var Navibar: UINavigationBar?
+    @IBOutlet weak var Tabbar : UITabBar?
+
+    @IBAction func out(){
+        self.dismiss(animated: true, completion: nil)
+    }
     
     let alert = UIAlertController(title: "Great Title", message: "Please input something", preferredStyle: .alert)
     
@@ -47,8 +53,11 @@ class DetailViewController : UIViewController{
         self.present(alert, animated:true, completion: nil)
     }
     override func viewDidLoad() {
+
         
         title = data?.name
+        Navibar?.topItem?.title = data?.name
+
         super.viewDidLoad()
         progressDesign(ProgressBar: ProgressBar,OuterProgressBar: OuterProgressBar)
         ImgDesign(Imgview: IMG!)
@@ -56,6 +65,8 @@ class DetailViewController : UIViewController{
         if data?.price != nil{
             money = (data?.price)! - (data?.save)!
             Money?.text = money.description + "원"
+            Money?.adjustsFontSizeToFitWidth = true
+            Money?.minimumScaleFactor = 0.2
         }
         else{
             money = 0
@@ -72,6 +83,8 @@ class DetailViewController : UIViewController{
             }
             else{
                 MPD?.text = (Int(Double(money)/interval)).description + "원"
+                MPD?.adjustsFontSizeToFitWidth = true
+                MPD?.minimumScaleFactor = 0.2
             }
             var s = "-"
             if interval < 0 {
@@ -100,8 +113,6 @@ class DetailViewController : UIViewController{
         
         var update = 0
         
-        
-        
         let action2 = UIAlertAction(title: "취소", style: .destructive) { (action:UIAlertAction) in
             print("You've pressed cancel");
         }
@@ -129,6 +140,9 @@ class DetailViewController : UIViewController{
         
         
         
+
+        Memo?.text = data?.memo
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -171,7 +185,7 @@ class DetailViewController : UIViewController{
             //돈을 추가하고 save와 진행바를 갱신
             let addtextField = addController.textFields![0] as UITextField
             addtextField.keyboardType = .decimalPad
-            ㅆㅅ
+            
             addinput = Int(addtextField.text!)!
             data.save += addinput
             
