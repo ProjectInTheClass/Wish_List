@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		365004E720BFDE6A001599A2 /* MainSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365004E620BFDE6A001599A2 /* MainSceneViewController.swift */; };
 		36C6BA2020B7EEB0009E9753 /* MainSceneFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6BA1F20B7EEB0009E9753 /* MainSceneFunctions.swift */; };
+		3B88DC5020D2863C002388F2 /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88DC4F20D2863C002388F2 /* ModifyViewController.swift */; };
 		EE4DB90520AEC8610015EDC4 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4DB90420AEC8610015EDC4 /* Functions.swift */; };
 		EEBCE03220887C060033D5E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBCE03120887C060033D5E7 /* AppDelegate.swift */; };
 		EEBCE03420887C060033D5E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBCE03320887C060033D5E7 /* ViewController.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		365004E620BFDE6A001599A2 /* MainSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneViewController.swift; sourceTree = "<group>"; };
 		36C6BA1F20B7EEB0009E9753 /* MainSceneFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneFunctions.swift; sourceTree = "<group>"; };
+		3B88DC4F20D2863C002388F2 /* ModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyViewController.swift; sourceTree = "<group>"; };
 		EE4DB90420AEC8610015EDC4 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		EEBCE02E20887C060033D5E7 /* Wish_List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wish_List.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBCE03120887C060033D5E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				365004E620BFDE6A001599A2 /* MainSceneViewController.swift */,
 				36C6BA1F20B7EEB0009E9753 /* MainSceneFunctions.swift */,
 				EED5E8AE20CA6517001B5F6A /* Detail_Info_Controller.swift */,
+				3B88DC4F20D2863C002388F2 /* ModifyViewController.swift */,
 			);
 			path = Wish_List;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				EEBCE03420887C060033D5E7 /* ViewController.swift in Sources */,
 				EED5E8AD20C935A4001B5F6A /* AddItemViewController.swift in Sources */,
 				EE4DB90520AEC8610015EDC4 /* Functions.swift in Sources */,
+				3B88DC5020D2863C002388F2 /* ModifyViewController.swift in Sources */,
 				EEBCE03220887C060033D5E7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

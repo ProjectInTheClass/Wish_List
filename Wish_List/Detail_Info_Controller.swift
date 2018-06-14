@@ -121,7 +121,7 @@ class DetailViewController : UIViewController{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let nextVC = segue.destination as? DetailViewController
+        if let nextVC = segue.destination as? ModifyViewController
         {
             nextVC.data = data
         }

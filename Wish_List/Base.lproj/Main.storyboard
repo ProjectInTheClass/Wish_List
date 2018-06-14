@@ -286,18 +286,14 @@
             </objects>
             <point key="canvasLocation" x="2236" y="-43.628185907046479"/>
         </scene>
-        <!--View Controller-->
+        <!--Modify View Controller-->
         <scene sceneID="SPS-6U-ebH">
             <objects>
-                <viewController id="eoO-vb-5Up" sceneMemberID="viewController">
+                <viewController id="eoO-vb-5Up" customClass="ModifyViewController" customModule="Wish_List" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HHp-Sq-ARU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yXV-ql-uGp">
-                                <rect key="frame" x="15" y="81" width="128" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CcI-CF-eor">
                                 <rect key="frame" x="152" y="116" width="207" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -370,13 +366,6 @@
                                     <action selector="cancel:" destination="25S-tK-FdT" eventType="touchUpInside" id="ahN-jr-7j9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l80-Rd-b7E">
-                                <rect key="frame" x="15" y="81" width="128" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="selectImage:" destination="25S-tK-FdT" eventType="touchUpInside" id="D3a-G2-J3F"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="정기 저축액" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b42-Nf-QBW">
                                 <rect key="frame" x="152" y="217" width="78" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -396,10 +385,25 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="favorite" image="favorite_not"/>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7QV-LU-PNo">
+                                <rect key="frame" x="7" y="116" width="137" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="wbu-aP-EiX"/>
                     </view>
+                    <connections>
+                        <outlet property="Cancel" destination="iVU-0d-mkf" id="tI2-lE-jH3"/>
+                        <outlet property="Date" destination="Kj9-3c-KSO" id="Yyz-6r-cKz"/>
+                        <outlet property="Favorite" destination="geE-5z-evF" id="Htt-Xp-uvf"/>
+                        <outlet property="Image" destination="7QV-LU-PNo" id="dF1-XC-HcW"/>
+                        <outlet property="Memo" destination="LeV-WG-lK3" id="jHA-e5-nv6"/>
+                        <outlet property="Name" destination="CcI-CF-eor" id="gjh-D7-KYQ"/>
+                        <outlet property="OK" destination="x4i-AE-OcU" id="sN4-Fv-T6h"/>
+                        <outlet property="Price" destination="CJy-N7-pAl" id="ogw-mX-AP8"/>
+                        <outlet property="Save" destination="Dsu-mR-TYv" id="VPH-os-Aoi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mgd-Bq-aAi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
