@@ -36,17 +36,29 @@ class DetailViewController : UIViewController{
     @IBOutlet weak var Memo : UILabel?
     @IBOutlet weak var Lists : UITableView?
     @IBOutlet weak var Navibar: UINavigationBar?
-    @IBOutlet weak var Tabbar : UITabBar?
+    @IBOutlet weak var back: UIView?
 
     @IBAction func out(){
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func delete(){
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         Navibar?.topItem?.title = data?.name
+        
         super.viewDidLoad()
         progressDesign(ProgressBar: ProgressBar,OuterProgressBar: OuterProgressBar)
         ImgDesign(Imgview: IMG!)
+        
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "background")
+        backgroundImage.contentMode =  UIViewContentMode.scaleToFill
+        self.view.insertSubview(backgroundImage, at: 0)
+        back?.layer.borderWidth = 1
         let money : Int
         if data?.price != nil{
             money = (data?.price)! - (data?.save)!
@@ -98,6 +110,14 @@ class DetailViewController : UIViewController{
         ProgressBar?.progress = percent
         Memo?.text = data?.memo
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nextVC = segue.destination as? DetailViewController
+        {
+            nextVC.data = data
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
