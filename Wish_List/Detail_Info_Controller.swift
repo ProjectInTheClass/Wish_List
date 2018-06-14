@@ -42,6 +42,14 @@ class DetailViewController : UIViewController{
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func ClickAdd(_ sender: Any) {
+        Addsave(data: self.data!)
+    }
+    
+    @IBAction func Clickminus(_ sender: Any) {
+        Minussave(data: self.data!)
+    }
+    
     override func viewDidLoad() {
         Navibar?.topItem?.title = data?.name
         super.viewDidLoad()
@@ -168,18 +176,18 @@ class DetailViewController : UIViewController{
         let minusController = UIAlertController(title: "출금", message: "얼마나 뺄까요?", preferredStyle: .alert)
         let MinusAction1 = UIAlertAction(title: "출금", style: .default) { (action:UIAlertAction) in
             //돈을 추가하고 save와 진행바를 갱신
-            let addtextField = addController.textFields![0] as UITextField
-            addtextField.keyboardType = .decimalPad
+            let minustextField = minusController.textFields![0] as UITextField
+            minustextField.keyboardType = .decimalPad
             
-            addinput = Int(addtextField.text!)!
-            data.save += addinput
+            minusinput = Int(minustextField.text!)!
+            data.save += minusinput
             
             self.Save?.text = data.save.description
             let percent = progress(lists:data)
             self.Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
             self.ProgressBar?.progress = percent
         }
-        addController.addTextField { (textField) in
+        minusController.addTextField { (textField) in
             textField.placeholder = "입금 금액"
         }
         
@@ -187,10 +195,10 @@ class DetailViewController : UIViewController{
             print("You've pressed cancel");
         }
         
-        addController.addAction(action2)
-        addController.addAction(AddAction1)
+        minusController.addAction(action2)
+        minusController.addAction(MinusAction1)
         
-        self.present(addController, animated: true, completion: nil)
+        self.present(minusController, animated: true, completion: nil)
         
     }
 }
