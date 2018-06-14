@@ -41,7 +41,7 @@ class DetailViewController : UIViewController{
     @IBAction func out(){
         self.dismiss(animated: true, completion: nil)
     }
-    
+    /*
     @IBAction func ClickAdd(_ sender: Any) {
         Addsave(data: self.data!)
     }
@@ -49,7 +49,7 @@ class DetailViewController : UIViewController{
     @IBAction func Clickminus(_ sender: Any) {
         Minussave(data: self.data!)
     }
-    
+    */
     override func viewDidLoad() {
         Navibar?.topItem?.title = data?.name
         super.viewDidLoad()
@@ -139,7 +139,7 @@ class DetailViewController : UIViewController{
         Imgview.layer.cornerRadius = (Imgview.frame.height) / 2
         Imgview.clipsToBounds = true
     }
-    
+    /*
     func Addsave(data : Wish_Item){
         var addinput = 0
         let addController = UIAlertController(title: "입금", message: "얼마나 넣을까요?", preferredStyle: .alert)
@@ -201,4 +201,5 @@ class DetailViewController : UIViewController{
         self.present(minusController, animated: true, completion: nil)
         
     }
+ */
 }
