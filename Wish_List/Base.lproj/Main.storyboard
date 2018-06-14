@@ -26,6 +26,9 @@
                                 <rect key="frame" x="227" y="296" width="43" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="돈 넣기"/>
+                                <connections>
+                                    <action selector="ClickPlus:" destination="ebc-ey-gZQ" eventType="touchUpInside" id="2jt-sR-cVP"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="날짜" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ydi-m5-LFO">
                                 <rect key="frame" x="268" y="230" width="91" height="18"/>
@@ -109,6 +112,9 @@
                                 <rect key="frame" x="316" y="296" width="43" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="돈 빼기"/>
+                                <connections>
+                                    <action selector="ClickMinus:" destination="ebc-ey-gZQ" eventType="touchUpInside" id="1m4-MI-Zbr"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WK6-pZ-qdA">
                                 <rect key="frame" x="253" y="136" width="106" height="21"/>

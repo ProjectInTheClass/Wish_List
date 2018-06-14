@@ -47,6 +47,15 @@ class DetailViewController : UIViewController{
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func ClickMinus(_ sender: Any) {
+        Minussave(data : data!)
+    }
+    
+    @IBAction func ClickPlus(_ sender: Any) {
+        Addsave(data : data!)
+    }
+    
+    
     override func viewDidLoad() {
         Navibar?.topItem?.title = data?.name
         
@@ -150,5 +159,67 @@ class DetailViewController : UIViewController{
         Imgview.layer.borderColor = UIColor.black.cgColor
         Imgview.layer.cornerRadius = (Imgview.frame.height) / 2
         Imgview.clipsToBounds = true
+    }
+    
+    func Addsave(data : Wish_Item){
+        var addinput = 0
+        let addController = UIAlertController(title: "입금", message: "얼마나 넣을까요?", preferredStyle: .alert)
+        let AddAction1 = UIAlertAction(title: "입금", style: .default) { (action:UIAlertAction) in
+            //돈을 추가하고 save와 진행바를 갱신
+            let addtextField = addController.textFields![0] as UITextField
+            addtextField.keyboardType = .decimalPad
+            
+            addinput = Int(addtextField.text!)!
+            data.save += addinput
+            
+            self.Save?.text = data.save.description
+            let percent = progress(lists:data)
+            self.Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
+            self.ProgressBar?.progress = percent
+        }
+        addController.addTextField { (textField) in
+            textField.placeholder = "입금 금액"
+        }
+        
+        let action2 = UIAlertAction(title: "취소", style: .destructive) { (action:UIAlertAction) in
+            print("You've pressed cancel");
+        }
+        
+        addController.addAction(action2)
+        addController.addAction(AddAction1)
+        
+        self.present(addController, animated: true, completion: nil)
+        
+    }
+    
+    func Minussave(data : Wish_Item){
+        var minusinput = 0
+        let minusController = UIAlertController(title: "출금", message: "얼마나 뺄까요?", preferredStyle: .alert)
+        let MinusAction1 = UIAlertAction(title: "출금", style: .default) { (action:UIAlertAction) in
+            //돈을 추가하고 save와 진행바를 갱신
+            let minustextField = minusController.textFields![0] as UITextField
+            minustextField.keyboardType = .decimalPad
+            
+            minusinput = Int(minustextField.text!)!
+            data.save -= minusinput
+            
+            self.Save?.text = data.save.description
+            let percent = progress(lists:data)
+            self.Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
+            self.ProgressBar?.progress = percent
+        }
+        minusController.addTextField { (textField) in
+            textField.placeholder = "출금 금액"
+        }
+        
+        let action2 = UIAlertAction(title: "취소", style: .destructive) { (action:UIAlertAction) in
+            print("You've pressed cancel");
+        }
+        
+        minusController.addAction(action2)
+        minusController.addAction(MinusAction1)
+        
+        self.present(minusController, animated: true, completion: nil)
+        
     }
 }
