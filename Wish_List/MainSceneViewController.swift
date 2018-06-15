@@ -37,12 +37,21 @@ class MainSceneViewController: UIViewController {
     @IBOutlet weak var OuterDayiscommingProgressBar: UIProgressView!
     @IBOutlet weak var DayiscommingProgress: UILabel!
     
+    @IBOutlet weak var NoFavoriteView: UIView!
+    @IBOutlet weak var NoEndisnear: UIView!
+    @IBOutlet weak var NoDayiscomming: UIView!
+    
     @IBAction func FavoriteRefresh(_ sender: Any) {
         getNextFavorite()
         RefreshFavoriteCell()
     }
     
     func RefreshFavoriteCell () {
+        if (favoriteIndex == -1) {
+            NoFavoriteView.isHidden = false
+            return
+        }
+        NoFavoriteView.isHidden = true
         FavoriteImage.image = Items[favoriteIndex].img
         
         FavoriteName.text = Items[favoriteIndex].name
@@ -60,6 +69,11 @@ class MainSceneViewController: UIViewController {
     }
     
     func RefreshEndisnearCell() {
+        if (endisnearIndex == -1) {
+            NoEndisnear.isHidden = false
+            return
+        }
+        NoEndisnear.isHidden = true
         EndisnearImage.image = Items[endisnearIndex].img
         EndisnearName.text = Items[endisnearIndex].name
         EndisnearDeadline.text = formatter.string(from: Items[endisnearIndex].d_day!)
@@ -75,6 +89,11 @@ class MainSceneViewController: UIViewController {
     }
     
     func RefreshDayiscommingCell() {
+        if (dayiscommingIndex == -1) {
+            NoDayiscomming.isHidden = false
+            return
+        }
+        NoDayiscomming.isHidden = true
         DayiscommingImage.image = Items[dayiscommingIndex].img
         DayiscommingName.text = Items[dayiscommingIndex].name
         DayiscommingDeadline.text = formatter.string(from: Items[dayiscommingIndex].d_day!)
@@ -144,5 +163,20 @@ class MainSceneViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nextVC = segue.destination as? DetailViewController
+        {
+            var selectedIndex = 0
+            if (segue.identifier == "FavoriteSegue") {
+                selectedIndex = favoriteIndex
+            } else if (segue.identifier == "EndisnearSegue") {
+                selectedIndex = endisnearIndex
+            } else if (segue.identifier == "DayiscommingSegue") {
+                selectedIndex = dayiscommingIndex
+            }
+            
+            nextVC.data = Items[selectedIndex]
+        }
+    }
 }

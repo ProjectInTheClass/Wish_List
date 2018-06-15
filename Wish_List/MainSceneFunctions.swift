@@ -9,7 +9,7 @@
 import Foundation
 
 let endisnearCriterion = 0.7 // 달성률이 70% 이상일 때 달성임박
-let dayiscommingCriterion : TimeInterval = 7 * 24 * 3600 // 마감일이 일주일 이하 남았을 때 마감임박
+let dayiscommingCriterion : TimeInterval = 21 * 24 * 3600 // 마감일이 일주일 이하 남았을 때 마감임박
 
 var favoriteIndex = -1
 var endisnearIndex = -1
@@ -17,21 +17,22 @@ var dayiscommingIndex = -1
 
 func getNextFavorite() {
     var curIndex = favoriteIndex + 1
-    if (curIndex == -1) {
+    var InitIndex = favoriteIndex
+    if (favoriteIndex == -1) {
         curIndex = 0
+        InitIndex = Items.count - 1
     }
     while (true) {
         if (curIndex >= Items.count) {
             curIndex = 0
         }
-        if (curIndex == favoriteIndex) {
-            if (!Items[favoriteIndex].favorite) {
-                favoriteIndex = -1
-            }
-            break
-        }
+        
         if (Items[curIndex].favorite) {
             favoriteIndex = curIndex
+            break
+        }
+        if (curIndex == InitIndex) {
+            favoriteIndex = -1
             break
         }
         curIndex += 1
@@ -40,22 +41,22 @@ func getNextFavorite() {
 
 func getNextEndisnear() {
     var curIndex = endisnearIndex + 1
-    if (curIndex == -1) {
+    var InitIndex = endisnearIndex
+    if (endisnearIndex == -1) {
         curIndex = 0
+        InitIndex = Items.count - 1
     }
     refreshEndisnear()
     while (true) {
         if (curIndex >= Items.count) {
             curIndex = 0
         }
-        if (curIndex == endisnearIndex) {
-            if (!Items[curIndex].endisnear) {
-                endisnearIndex = -1
-            }
-            break
-        }
         if (Items[curIndex].endisnear) {
             endisnearIndex = curIndex
+            break
+        }
+        if (curIndex == InitIndex) {
+            endisnearIndex = -1
             break
         }
         curIndex += 1
@@ -64,22 +65,22 @@ func getNextEndisnear() {
 
 func getNextDayiscoming() {
     var curIndex = dayiscommingIndex + 1
-    if (curIndex == -1) {
+    var InitIndex = dayiscommingIndex
+    if (dayiscommingIndex == -1) {
         curIndex = 0
+        InitIndex = Items.count - 1
     }
     refreshDayiscomming()
     while (true) {
         if (curIndex >= Items.count) {
             curIndex = 0
         }
-        if (curIndex == dayiscommingIndex) {
-            if (!Items[curIndex].endisnear) {
-                dayiscommingIndex = -1
-            }
-            break
-        }
         if (Items[curIndex].dayiscomming) {
             dayiscommingIndex = curIndex
+            break
+        }
+        if (curIndex == InitIndex) {
+            dayiscommingIndex = -1
             break
         }
         curIndex += 1
