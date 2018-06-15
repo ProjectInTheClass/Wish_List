@@ -190,7 +190,7 @@ class DetailViewController : UIViewController{
             else {
                 addinput  = 0
             }
-            
+            //
         }
         addController.addTextField { (textField) in
             textField.placeholder = "입금 금액"
