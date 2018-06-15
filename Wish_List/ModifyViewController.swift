@@ -18,14 +18,45 @@ class ModifyViewController: UIViewController {
     @IBOutlet weak var Image: UIImageView!
     @IBOutlet weak var Name: UITextField!
     @IBOutlet weak var Price: UITextField!
-    @IBOutlet weak var Save: UITextField!
+    
+    @IBOutlet weak var Month_Save: UITextField!
     @IBOutlet weak var Date: UIDatePicker!
     @IBOutlet weak var Memo: UITextView!
+    
+    let fav_img = UIImage(named: "favorite")
+    let favn_img = UIImage(named: "favorite_not")
+    
+    @IBAction func ClickFavorite(_ sender: Any) {
+        if (data?.favorite)! {
+            data?.favorite = false
+            Favorite.setImage(favn_img, for: .normal)
+        }
+        else {
+            data?.favorite = true
+            Favorite.setImage(fav_img, for: .normal)
+        }
+    }
+    @IBAction func ClickCancle(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    @IBAction func ClickModify(_ sender: Any) {
+        data?.name = Name.text!
+        if (Int(Price.text!) != nil) {
+            data?.price = Int(Price.text!)
+        }
+        data?.d_day = Date.date
+        data?.memo = Memo.text!
+        
+        if (Int(Month_Save.text!) != nil) {
+            data?.money_monthly = Int(Month_Save.text!)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+    
         
         Name?.text = data?.name
         Image?.image = data?.img
@@ -34,8 +65,13 @@ class ModifyViewController: UIViewController {
         }
         else{
         }
+        if data?.money_monthly != nil {
+            Month_Save?.text = data?.money_monthly?.description
+        }
+        else {
+            Month_Save?.text = "가격 미상"
+        }
         
-        Save?.text = data?.save.description
         if data?.price != nil{
             Price?.text = data?.price?.description
         }
@@ -43,7 +79,14 @@ class ModifyViewController: UIViewController {
             Price?.text = "가격 미상"
         }
         Memo?.text = data?.memo
-
+        
+        if (data?.favorite)! {
+            Favorite.setImage(fav_img, for: .normal)
+        }
+        else {
+            Favorite.setImage(favn_img, for: .normal)
+        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -53,14 +96,5 @@ class ModifyViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

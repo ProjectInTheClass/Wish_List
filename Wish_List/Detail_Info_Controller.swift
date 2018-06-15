@@ -163,23 +163,42 @@ class DetailViewController : UIViewController{
     
     func Addsave(data : Wish_Item){
         var addinput = 0
+        
         let addController = UIAlertController(title: "입금", message: "얼마나 넣을까요?", preferredStyle: .alert)
+        
         let AddAction1 = UIAlertAction(title: "입금", style: .default) { (action:UIAlertAction) in
             //돈을 추가하고 save와 진행바를 갱신
             let addtextField = addController.textFields![0] as UITextField
+            let addInfo = addController.textFields![1] as UITextField
             addtextField.keyboardType = .decimalPad
+            if Int(addtextField.text!) != nil {
+                addinput = Int(addtextField.text!)!
+                //handle exception here
+                data.save += addinput
+                
+                let input_memo = addInfo.text!
+                
+                let add_his = history(info: input_memo, money: addinput, date: Date(), is_input: true)
+                data.m_info?.append(add_his)
+                
+                self.Save?.text = data.save.description
+                let percent = progress(lists:data)
+                self.Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
+                self.ProgressBar?.progress = percent
+                
+            }
+            else {
+                addinput  = 0
+            }
             
-            addinput = Int(addtextField.text!)!
-            data.save += addinput
-            
-            self.Save?.text = data.save.description
-            let percent = progress(lists:data)
-            self.Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
-            self.ProgressBar?.progress = percent
         }
         addController.addTextField { (textField) in
             textField.placeholder = "입금 금액"
         }
+        addController.addTextField { (textField) in
+            textField.placeholder = "입금 이유(선택)"
+        }
+        
         
         let action2 = UIAlertAction(title: "취소", style: .destructive) { (action:UIAlertAction) in
             print("You've pressed cancel");
@@ -198,18 +217,30 @@ class DetailViewController : UIViewController{
         let MinusAction1 = UIAlertAction(title: "출금", style: .default) { (action:UIAlertAction) in
             //돈을 추가하고 save와 진행바를 갱신
             let minustextField = minusController.textFields![0] as UITextField
+            let minusInfo = minusController.textFields![1] as UITextField
             minustextField.keyboardType = .decimalPad
-            
-            minusinput = Int(minustextField.text!)!
-            data.save -= minusinput
-            
-            self.Save?.text = data.save.description
-            let percent = progress(lists:data)
-            self.Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
-            self.ProgressBar?.progress = percent
+            if Int(minustextField.text!) != nil{
+                minusinput = Int(minustextField.text!)!
+                //exceptionhandling here
+                data.save -= minusinput
+                let output_memo = minusInfo.text!
+                let min_his = history(info: output_memo, money: minusinput, date: Date(), is_input: false)
+                data.m_info?.append(min_his)
+                
+                self.Save?.text = data.save.description
+                let percent = progress(lists:data)
+                self.Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
+                self.ProgressBar?.progress = percent
+            }
+            else {
+                
+            }
         }
         minusController.addTextField { (textField) in
             textField.placeholder = "출금 금액"
+        }
+        minusController.addTextField { (textField) in
+            textField.placeholder = "출금 이유(선택)"
         }
         
         let action2 = UIAlertAction(title: "취소", style: .destructive) { (action:UIAlertAction) in

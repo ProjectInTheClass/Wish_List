@@ -355,7 +355,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="확인"/>
                                 <connections>
-                                    <action selector="confirm:" destination="25S-tK-FdT" eventType="touchUpInside" id="SoZ-47-8G8"/>
+                                    <action selector="ClickModify:" destination="eoO-vb-5Up" eventType="touchUpInside" id="GgU-Wn-QRc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVU-0d-mkf">
@@ -363,7 +363,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="취소"/>
                                 <connections>
-                                    <action selector="cancel:" destination="25S-tK-FdT" eventType="touchUpInside" id="ahN-jr-7j9"/>
+                                    <action selector="ClickCancle:" destination="eoO-vb-5Up" eventType="touchUpInside" id="rVG-Ny-dCQ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="정기 저축액" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b42-Nf-QBW">
@@ -384,6 +384,9 @@
                                 <rect key="frame" x="331" y="81" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="favorite" image="favorite_not"/>
+                                <connections>
+                                    <action selector="ClickFavorite:" destination="eoO-vb-5Up" eventType="touchUpInside" id="nea-ps-Fsd"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7QV-LU-PNo">
                                 <rect key="frame" x="7" y="116" width="137" height="128"/>
@@ -399,10 +402,10 @@
                         <outlet property="Favorite" destination="geE-5z-evF" id="Htt-Xp-uvf"/>
                         <outlet property="Image" destination="7QV-LU-PNo" id="dF1-XC-HcW"/>
                         <outlet property="Memo" destination="LeV-WG-lK3" id="jHA-e5-nv6"/>
+                        <outlet property="Month_Save" destination="Dsu-mR-TYv" id="mII-ue-ZRv"/>
                         <outlet property="Name" destination="CcI-CF-eor" id="gjh-D7-KYQ"/>
                         <outlet property="OK" destination="x4i-AE-OcU" id="sN4-Fv-T6h"/>
                         <outlet property="Price" destination="CJy-N7-pAl" id="ogw-mX-AP8"/>
-                        <outlet property="Save" destination="Dsu-mR-TYv" id="VPH-os-Aoi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mgd-Bq-aAi" userLabel="First Responder" sceneMemberID="firstResponder"/>
