@@ -665,8 +665,15 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kj7-zl-9Xw">
+                                        <rect key="frame" x="0.0" y="31" width="375" height="99"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <segue destination="ebc-ey-gZQ" kind="presentation" identifier="FavoriteSegue" id="E0T-n4-CcP"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l7S-4Q-ldj">
-                                        <rect key="frame" x="0.0" y="32" width="375" height="99"/>
+                                        <rect key="frame" x="0.0" y="31" width="375" height="99"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="해당 사항이 없습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aK9-jI-FBC">
@@ -755,6 +762,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hu7-K9-nDr">
+                                        <rect key="frame" x="0.0" y="31" width="375" height="99"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <segue destination="ebc-ey-gZQ" kind="presentation" identifier="EndisnearSegue" id="ri7-cb-EyY"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sgy-1f-piW">
                                         <rect key="frame" x="0.0" y="32" width="375" height="99"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -845,6 +859,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOx-T1-fce">
+                                        <rect key="frame" x="0.0" y="31" width="375" height="99"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <segue destination="ebc-ey-gZQ" kind="presentation" identifier="DayiscommingSegue" id="n6f-C1-CM0"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NtY-EQ-fQi">
                                         <rect key="frame" x="0.0" y="31" width="375" height="99"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1035,4 +1056,7 @@
         <image name="modify" width="512" height="512"/>
         <image name="plus" width="110" height="110"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="E0T-n4-CcP"/>
+    </inferredMetricsTieBreakers>
 </document>

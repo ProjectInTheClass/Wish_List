@@ -163,5 +163,20 @@ class MainSceneViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nextVC = segue.destination as? DetailViewController
+        {
+            var selectedIndex = 0
+            if (segue.identifier == "FavoriteSegue") {
+                selectedIndex = favoriteIndex
+            } else if (segue.identifier == "EndisnearSegue") {
+                selectedIndex = endisnearIndex
+            } else if (segue.identifier == "DayiscommingSegue") {
+                selectedIndex = dayiscommingIndex
+            }
+            
+            nextVC.data = Items[selectedIndex]
+        }
+    }
 }
