@@ -16,10 +16,38 @@ class Money_History_Controller: UIViewController{
     @IBOutlet weak var Navibar: UINavigationBar?
     
     override func viewDidLoad() {
-    super.viewDidLoad()
-    Navibar?.topItem?.title = data?.name
+        super.viewDidLoad()
+        Navibar?.topItem?.title = data?.name
+        Save?.text = (data?.save.description)! + "원"
+        Save?.adjustsFontSizeToFitWidth = true
+        Save?.minimumScaleFactor = 0.2
+        
+        var interval : Double
+        var s = "-"
+        interval = (data?.d_day?.timeIntervalSinceNow)!
+        interval = interval / 86400
+        if interval < 0 {
+            interval = interval * -1
+            s = "+"
+        }
+        D_day?.text = "D " + s + " " + (Int(interval)).description
     
+    }
     
+    @IBAction func out(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func show_all(){
+        
+    }
+    
+    @IBAction func show_out(){
+        
+    }
+    
+    @IBAction func show_in(){
+        
     }
     
 }

@@ -18,6 +18,24 @@ import UIKit
 //변동 내역 누르면 따로 detail view 창 띄워서 볼 수 있게 하는건?
 
 //내역 삭제는 불가. 다만 내용은 변경할 수 있음(액수 변경은 불가. 내역은 가능, 날짜는?)
+class Detail_info_CellView:UITableViewCell{
+    @IBOutlet weak var Reason : UILabel?
+    @IBOutlet weak var Day : UILabel?
+    @IBOutlet weak var Money : UILabel?
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    override func prepareForReuse() {
+        
+        super.prepareForReuse()
+        Reason?.text = nil
+        Day?.text = nil
+        Money?.text = nil
+    }
+}
+
 class DetailViewController : UIViewController{
     var data:Wish_Item?;
     @IBOutlet weak var IMG : UIImageView?
@@ -105,6 +123,8 @@ class DetailViewController : UIViewController{
             D_day?.text = "날짜 미정"
         }
         SPM?.text = (data?.money_monthly?.description)! + "원"
+        SPM?.adjustsFontSizeToFitWidth = true
+        SPM?.minimumScaleFactor = 0.2
         
         E_day?.text = formatter.string(from: (data?.d_day!)!)
         Save?.text = data?.save.description
@@ -172,10 +192,15 @@ class DetailViewController : UIViewController{
         Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
         ProgressBar?.progress = percent
         Memo?.text = data?.memo
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nextVC = segue.destination as? ModifyViewController
+        {
+            nextVC.data = data
+        }
+        if let nextVC = segue.destination as? Money_History_Controller
         {
             nextVC.data = data
         }
@@ -230,16 +255,23 @@ class DetailViewController : UIViewController{
                 //handle exception here
                 data.save += addinput
                 
-                let input_memo = addInfo.text!
+                let input_memo: String
+                if addInfo.text != ""{
+                    input_memo = addInfo.text!
+                }
+                else{
+                    input_memo = "입금"
+                }
                 
                 let add_his = history(info: input_memo, money: addinput, date: Date(), is_input: true)
-                data.m_info?.append(add_his)
+                print(add_his.date, add_his.info, add_his.money)
+                data.m_info.append(add_his)
                 
                 self.Save?.text = data.save.description
                 let percent = progress(lists:data)
                 self.Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
                 self.ProgressBar?.progress = percent
-                
+                self.Lists?.reloadData()
             }
             else {
                 addinput  = 0
@@ -248,6 +280,7 @@ class DetailViewController : UIViewController{
         }
         addController.addTextField { (textField) in
             textField.placeholder = "입금 금액"
+            
         }
         addController.addTextField { (textField) in
             textField.placeholder = "입금 이유(선택)"
@@ -274,17 +307,29 @@ class DetailViewController : UIViewController{
             let minusInfo = minusController.textFields![1] as UITextField
             minustextField.keyboardType = .decimalPad
             if Int(minustextField.text!) != nil{
+                if Int(minustextField.text!)! > data.save{
+                    //경고문 띄우기 "저축금보다 많은 금액을 출금하실 수 없습니다!"
+                    let money_out_alert = UIAlertController(title: "오류!", message: "저축금보다 많은 금액을 출금하실 수 없습니다!",preferredStyle: .alert)
+                    let alert_action = UIAlertAction(title: "확인", style: .default) { (action:UIAlertAction) in
+                        
+                    }
+                    money_out_alert.addAction(alert_action)
+                    self.present(money_out_alert, animated: true, completion: nil)
+                }
+                else{
                 minusinput = Int(minustextField.text!)!
                 //exceptionhandling here
                 data.save -= minusinput
                 let output_memo = minusInfo.text!
                 let min_his = history(info: output_memo, money: minusinput, date: Date(), is_input: false)
-                data.m_info?.append(min_his)
+                data.m_info.append(min_his)
                 
                 self.Save?.text = data.save.description
                 let percent = progress(lists:data)
                 self.Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
                 self.ProgressBar?.progress = percent
+                self.Lists?.reloadData()
+                }
             }
             else {
                 
@@ -305,6 +350,42 @@ class DetailViewController : UIViewController{
         minusController.addAction(MinusAction1)
         
         self.present(minusController, animated: true, completion: nil)
-        
     }
+    
+    
+}
+
+extension DetailViewController: UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //return proj.count
+        return (data?.m_info.count)!
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        //return 4
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // 첫 번째 인자로 등록한 identifier, cell은 as 키워드로 앞서 만든 custom cell class화 해준다.
+        let cell = Lists?.dequeueReusableCell(withIdentifier: "histories", for: indexPath as IndexPath) as! Detail_info_CellView // 위 작업을 마치면 커스텀 클래스의 outlet을 사용할 수 있다.
+
+        if data?.m_info[indexPath.row].is_input == true{
+            cell.Day?.textColor = UIColor.blue
+        }
+        else{
+            cell.Day?.textColor = UIColor.red
+        }
+        cell.Day?.text = "ddd"
+        cell.Money?.text = "ddd"
+        //cell.Day?.text = formatter.string(from: (data?.m_info[indexPath.row].date)!)
+       // cell.Money?.text = data?.m_info[indexPath.row].money.description
+        //cell.Reason?.text = data?.m_info[indexPath.row].info
+        return cell
+    }
+}
+extension DetailViewController: UITableViewDelegate{
+    
 }

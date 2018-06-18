@@ -29,7 +29,7 @@ class Wish_Item {
     var d_day : Date?            //달성 기한
     var img : UIImage?           //동기부여를 위한 목표물 사진/이미지
     var save : Int              //해당 목표물에 내가 투자한 금액
-    var m_info : Array<history>? //돈 넣고 뺀 기록
+    var m_info : Array<history>        //돈 넣고 뺀 기록
     var favorite : Bool         //즐겨찾기
     var endisnear : Bool        //달성임박
     var dayiscomming : Bool     //마감임박
@@ -49,6 +49,7 @@ class Wish_Item {
         self.endflag = false
         self.img = UIImage(named:"noimg")
         self.money_monthly = 0
+        self.m_info = []
         //self.d_day = ""
     }
     
@@ -62,6 +63,7 @@ class Wish_Item {
         self.finishflag = false
         self.endflag = false
         self.money_monthly = 0
+        self.m_info = []
     }
     func loadpicture(img: UIImage?) {
         

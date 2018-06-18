@@ -129,6 +129,7 @@ class MainSceneViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        
         super .viewWillAppear(true)
         let now=NSDate()
         let dateFormatter = DateFormatter()
