@@ -15,10 +15,27 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var deadline: UIDatePicker!
     @IBOutlet weak var memo: UITextView!
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var SPM : UITextField!
+    @IBOutlet weak var Favorite: UIButton?
     
+    var isfavor = false
     let imagePicker = UIImagePickerController()
+    let fav_img = UIImage(named: "favorite")
+    let favn_img = UIImage(named: "favorite_not")
     
     //var destVC = WishItemsViewController()
+    
+    @IBAction func fav_button(_ sender: Any){
+        if isfavor == false{
+            isfavor = true
+            self.Favorite?.setImage(fav_img, for: .normal)
+            
+        }
+        else{
+            isfavor = false
+            self.Favorite?.setImage(favn_img, for: .normal)
+        }
+    }
     
     @IBAction func selectImage(_ sender: Any) {
         //imagePicker.allowsEditing = false
@@ -53,10 +70,15 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         } else {
             temp.price = nil
         }
+        if let spm = SPM.text{
+            temp.money_monthly = Int(spm)
+        } else {
+            temp.money_monthly = nil
+        }
         temp.d_day = deadline.date as Date
-        temp.favorite = false
         temp.memo = memo.text!
         temp.img = image.image!
+        temp.favorite = isfavor
         
         Items.append(temp)
         

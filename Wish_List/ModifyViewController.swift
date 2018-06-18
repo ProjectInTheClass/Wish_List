@@ -57,7 +57,7 @@ class ModifyViewController: UIViewController {
         
         super.viewDidLoad()
     
-        
+        ImgDesign(Imgview: Image!)
         Name?.text = data?.name
         Image?.image = data?.img
         if data?.d_day != nil{
@@ -94,7 +94,13 @@ class ModifyViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func ImgDesign(Imgview : UIImageView){
+        Imgview.layer.borderWidth = 1
+        Imgview.layer.masksToBounds = false
+        Imgview.layer.borderColor = UIColor.black.cgColor
+        Imgview.layer.cornerRadius = (Imgview.frame.height) / 2
+        Imgview.clipsToBounds = true
+    }
 
 
 }
