@@ -10,6 +10,9 @@ import UIKit
 
 class MainSceneViewController: UIViewController {
 
+    @IBOutlet weak var GoodToday: UILabel?
+    @IBOutlet weak var Totaldaily: UILabel?
+    
     @IBOutlet weak var FavoriteImage: UIImageView!
     @IBOutlet weak var FavoriteName: UILabel!
     @IBOutlet weak var FavoriteDeadline: UILabel!
@@ -105,6 +108,11 @@ class MainSceneViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let now=NSDate()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        GoodToday?.text=dateFormatter.string(from: now as Date)
+        
         progressDesign(ProgressBar: DayiscommingProgressBar,OuterProgressBar: OuterDayiscommingProgressBar)
         progressDesign(ProgressBar: EndisnearProgressBar,OuterProgressBar: OuterEndisnearProgressBar)
         progressDesign(ProgressBar: FavoriteProgressBar,OuterProgressBar: OuterFavoriteProgressBar)
@@ -120,6 +128,21 @@ class MainSceneViewController: UIViewController {
         RefreshDayiscommingCell()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super .viewWillAppear(true)
+        let now=NSDate()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        GoodToday?.text=dateFormatter.string(from: now as Date)
+
+        // Do any additional setup after loading the view.
+        getNextFavorite()
+        getNextEndisnear()
+        getNextDayiscoming()
+        RefreshFavoriteCell()
+        RefreshEndisnearCell()
+        RefreshDayiscommingCell()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -119,6 +119,60 @@ class DetailViewController : UIViewController{
         ProgressBar?.progress = percent
         Memo?.text = data?.memo
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        Navibar?.topItem?.title = data?.name
+        let money : Int
+        if data?.price != nil{
+            money = (data?.price)! - (data?.save)!
+            Money?.text = money.description + "원"
+            Money?.adjustsFontSizeToFitWidth = true
+            Money?.minimumScaleFactor = 0.2
+        }
+        else{
+            money = 0
+            Money?.text = "가격 미상"
+        }
+        var interval : Double
+        IMG?.image = data?.img
+        
+        if data?.d_day != nil{
+            interval = (data?.d_day?.timeIntervalSinceNow)!
+            interval = interval / 86400
+            if interval < 0 {
+                MPD?.text = "기한 만료됨"
+            }
+            else{
+                MPD?.text = (Int(Double(money)/interval)).description + "원"
+                MPD?.adjustsFontSizeToFitWidth = true
+                MPD?.minimumScaleFactor = 0.2
+            }
+            var s = "-"
+            if interval < 0 {
+                interval = interval * -1
+                s = "+"
+            }
+            D_day?.text = "D " + s + " " + (Int(interval)).description
+        }
+        else{
+            MPD?.text = "날짜 미정"
+            D_day?.text = "날짜 미정"
+        }
+        SPM?.text = (data?.money_monthly?.description)! + "원"
+        
+        E_day?.text = formatter.string(from: (data?.d_day!)!)
+        Save?.text = data?.save.description
+        if data?.price != nil{
+            Price?.text = data?.price?.description
+        }
+        else{
+            Price?.text = "가격 미상"
+        }
+        let percent = progress(lists:data!)
+        Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
+        ProgressBar?.progress = percent
+        Memo?.text = data?.memo
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nextVC = segue.destination as? ModifyViewController
