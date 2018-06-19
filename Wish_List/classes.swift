@@ -6,6 +6,11 @@
 //  Copyright © 2018년 test. All rights reserved.
 //
 
+enum readSaveError: Error {
+    case nodata
+    case unarchive
+}
+
 import Foundation
 import UIKit
 
@@ -74,13 +79,13 @@ class Wish_Item {
 class WishItem_Save: NSObject, NSCoding {
     var name : String           //아이템 이름
     var price : Int
-    var d_day : Date
+    var d_day : String
     var save : Int              //해당 목표물에 내가 투자한 금액
     var favorite : Int         //즐겨찾기
     var money_monthly : Int
     var memo : String
     
-    init(name: String, price: Int, d_day: Date, save: Int, favorite: Int, month: Int, memo:String){
+    init(name: String, price: Int, d_day: String, save: Int, favorite: Int, month: Int, memo:String){
         self.name = name
         self.price = price
         self.d_day = d_day
@@ -93,7 +98,7 @@ class WishItem_Save: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         self.name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
         self.price = Int(aDecoder.decodeCInt(forKey: "price"))
-        self.d_day = (aDecoder.decodeObject(forKey: "d_day") as? Date)!
+        self.d_day = aDecoder.decodeObject(forKey: "d_day") as? String ?? ""
         self.save = Int(aDecoder.decodeCInt(forKey: "save"))
         self.favorite = Int(aDecoder.decodeCInt(forKey: "favorite"))
         self.money_monthly = Int(aDecoder.decodeCInt(forKey: "month"))
@@ -113,10 +118,10 @@ class WishItem_Save: NSObject, NSCoding {
 class history_Save: NSObject, NSCoding {
     var info : String           //금액 변동 원인
     var money : Int             //얼마나 변동
-    var date : Date             //언제
+    var date : String             //언제
     var is_input : Int         //넣었냐 뺐냐
     
-    init(info: String, money: Int, date: Date, is_input:Int){
+    init(info: String, money: Int, date: String, is_input:Int){
         //init 전에 예외처리를 하고 집어넣어야 함
         self.info = info
         self.money = money
@@ -125,7 +130,7 @@ class history_Save: NSObject, NSCoding {
     }
     required init?(coder aDecoder: NSCoder) {
         self.info = aDecoder.decodeObject(forKey: "info") as? String ?? ""
-        self.date = (aDecoder.decodeObject(forKey: "date") as? Date)!
+        self.date = aDecoder.decodeObject(forKey: "date") as? String ?? ""
         self.money = Int(aDecoder.decodeCInt(forKey: "money"))
         self.is_input = Int(aDecoder.decodeCInt(forKey: "is_input"))
     }
@@ -136,8 +141,8 @@ class history_Save: NSObject, NSCoding {
         aCoder.encode(is_input, forKey: "is_input")
     }
 }
-
-func saveWishItem(){
+/*
+func testsaveWishItem(){
     //test
     var items:[WishItem_Save] = []
     items.append(WishItem_Save(name: "a", price: 300, d_day: Date(), save: 100, favorite: 1, month: 3, memo: "hello1"))
@@ -146,7 +151,7 @@ func saveWishItem(){
     UserDefaults.standard.set(wishdata, forKey: "wishitems")
 }
 
-func loadWishItem(){
+func testloadWishItem(){
     //test
     guard let wishData = UserDefaults.standard.object(forKey: "wishitems") as? NSData else {
         print("errrrrror")
@@ -161,12 +166,123 @@ func loadWishItem(){
         print("name: \(wish.name)")
     }
 }
+ */
 
+//(이름)_history key 로 저장
+func saveHistory(name:String, histories: [history]){
+    formatter.dateFormat = "yyyy/MM/dd"
+    var historyList:[history_Save] = []
+    for his in histories {
+        let input = his.is_input ? 1 : 0
+        let day = formatter.string(from: his.date)
+        historyList.append(history_Save(info: his.info, money: his.money, date: day, is_input: input))
+    }
+    let hisdata = NSKeyedArchiver.archivedData(withRootObject: historyList)
+    UserDefaults.standard.set(hisdata, forKey: "\(name)_history")
+}
+
+//name과 일치하는 history를 뽑아옴
+//nodata error : 해당 이름의 history가 없음
+func loadHistory(name:String) throws -> [history]{
+    formatter.dateFormat = "yyyy/MM/dd"
+    var his:[history] = []
+    guard let hisData = UserDefaults.standard.object(forKey: "\(name)_history") as? NSData else {
+        print("error in loadhistory")
+        throw readSaveError.nodata
+    }
+    guard let historyList = NSKeyedUnarchiver.unarchiveObject(with: hisData as Data) as? [history_Save] else{
+        print("error in unarchive history")
+        throw readSaveError.unarchive
+    }
+    
+    for his_save in historyList {
+        let input = his_save.is_input == 1 ? true : false
+        let day = formatter.date(from: his_save.date)
+        his.append(history(info: his_save.info, money: his_save.money, date: day!, is_input: input))
+    }
+    return his
+}
+
+//wishitems key로 저장함
+func saveWishItem(WishList: [Wish_Item]){
+    formatter.dateFormat = "yyyy/MM/dd"
+    var savelist:[WishItem_Save] = []
+    for wish in WishList {
+        var price = 0
+        var month = 0
+        var memo = ""
+        let name = wish.name
+        let favor = wish.favorite ? 1 : 0
+        let save = wish.save
+        let date = formatter.string(from: wish.d_day!)
+        
+        //check nil
+        if let wprice = wish.price {
+            price = wprice
+        }
+        if let wmonth = wish.money_monthly {
+            month = wmonth
+        }
+        if let wmemo = wish.memo {
+            memo = wmemo
+        }
+        saveHistory(name: wish.name, histories: wish.m_info)
+        print("in savewish, date:\(date)")
+        savelist.append(WishItem_Save(name: name, price: price, d_day: date, save: save, favorite: favor, month: month, memo: memo))
+        
+    }
+    
+    let wishdata = NSKeyedArchiver.archivedData(withRootObject: savelist)
+    UserDefaults.standard.set(wishdata, forKey: "wishitems")
+}
+
+func loadWishItem() throws -> [Wish_Item]{
+    formatter.dateFormat = "yyyy/MM/dd"
+    var wish:[Wish_Item] = []
+    guard let wishdata = UserDefaults.standard.object(forKey: "wishitems") as? NSData else {
+        print("error in loadWishItem")
+        throw readSaveError.nodata
+    }
+    guard let wishitemList = NSKeyedUnarchiver.unarchiveObject(with: wishdata as Data) as? [WishItem_Save] else{
+        print("error in unarchive wishitems")
+        throw readSaveError.unarchive
+    }
+    
+    for wish_save in wishitemList {
+        let favor = wish_save.favorite == 1 ? true : false
+        let item = Wish_Item(name: wish_save.name, favorite: favor)
+        let date = formatter.date(from: wish_save.d_day)
+        item.d_day = date
+        item.save = wish_save.save
+
+        print("day:\(wish_save.d_day)")
+        if wish_save.price != 0 {
+            item.price = wish_save.price
+        }
+        if wish_save.money_monthly != 0 {
+            item.money_monthly = wish_save.money_monthly
+        }
+        if !wish_save.memo.isEmpty {
+            item.memo = wish_save.memo
+        }
+        
+        do {
+            try item.m_info = loadHistory(name: wish_save.name)
+        } catch readSaveError.nodata{
+            print("no data")
+        } catch readSaveError.unarchive{
+            print("can not unarchive")
+        }
+        //item.m_info = loadHistory(name: wish_save.name)
+        wish.append(item)
+        
+      
+    }
+    return wish
+}
 
 
 func makeDummy() -> [Wish_Item] {
-    saveWishItem()
-    loadWishItem()
     formatter.dateFormat = "yyyy/MM/dd"
     var Items:[Wish_Item]=[]
     let car = Wish_Item(name: "차",favorite: false,img: UIImage(named:"car"))
@@ -214,10 +330,30 @@ func makeDummy() -> [Wish_Item] {
     goldbar.save = 0
     goldbar.d_day = formatter.date(from: "2100/01/01")
     Items += [goldbar]
+    saveWishItem(WishList: Items)
     return Items
 }
 
 let formatter = DateFormatter()
 
-var Items:[Wish_Item] = makeDummy()
+
+func getitem() -> [Wish_Item] {
+    var Item:[Wish_Item] = []
+    
+    do {
+        try Item = loadWishItem()
+    } catch readSaveError.nodata{
+        print("no data")
+    } catch readSaveError.unarchive{
+        print("can not unarchive")
+    } catch {
+        print("무슨 짓을 하셨길래 이 에러가 출력되나요?")
+    }
+    
+    return Item
+}
+
+//var Items:[Wish_Item] = makeDummy()
+//var Items:[Wish_Item] = loadWishItem()
+var Items:[Wish_Item] = getitem()
 let no = Items.count
