@@ -52,6 +52,13 @@ class MainSceneViewController: UIViewController {
     func RefreshFavoriteCell () {
         if (favoriteIndex == -1) {
             NoFavoriteView.isHidden = false
+            FavoriteImage.image = UIImage(named:"noimg")
+            FavoriteName.text = " "
+            FavoriteDeadline.text = " "
+            FavoriteSaved.text = " "
+            FavoriteGoal.text = " "
+            FavoriteProgressBar.progress = 0
+            FavoriteProgress.text = " "
             return
         }
         NoFavoriteView.isHidden = true
@@ -74,6 +81,13 @@ class MainSceneViewController: UIViewController {
     func RefreshEndisnearCell() {
         if (endisnearIndex == -1) {
             NoEndisnear.isHidden = false
+            EndisnearImage.image = UIImage(named:"noimg")
+            EndisnearName.text = " "
+            EndisnearDeadline.text = " "
+            EndisnearSaved.text = " "
+            EndisnearGoal.text = " "
+            EndisnearProgressBar.progress = 0
+            EndisnearProgress.text = " "
             return
         }
         NoEndisnear.isHidden = true
@@ -94,6 +108,13 @@ class MainSceneViewController: UIViewController {
     func RefreshDayiscommingCell() {
         if (dayiscommingIndex == -1) {
             NoDayiscomming.isHidden = false
+            DayiscommingImage.image = UIImage(named:"noimg")
+            DayiscommingName.text = " "
+            DayiscommingDeadline.text = " "
+            DayiscommingSaved.text = " "
+            DayiscommingGoal.text = " "
+            DayiscommingProgressBar.progress = 0
+            DayiscommingProgress.text = " "
             return
         }
         NoDayiscomming.isHidden = true

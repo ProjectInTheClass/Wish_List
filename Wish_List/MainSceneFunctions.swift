@@ -18,6 +18,10 @@ var dayiscommingIndex = -1
 func getNextFavorite() {
     var curIndex = favoriteIndex + 1
     var InitIndex = favoriteIndex
+    if (Items.count == 0) {
+        favoriteIndex = -1
+        return
+    }
     if (favoriteIndex == -1) {
         curIndex = 0
         InitIndex = Items.count - 1
@@ -42,6 +46,10 @@ func getNextFavorite() {
 func getNextEndisnear() {
     var curIndex = endisnearIndex + 1
     var InitIndex = endisnearIndex
+    if (Items.count == 0) {
+        endisnearIndex = -1
+        return
+    }
     if (endisnearIndex == -1) {
         curIndex = 0
         InitIndex = Items.count - 1
@@ -66,6 +74,10 @@ func getNextEndisnear() {
 func getNextDayiscoming() {
     var curIndex = dayiscommingIndex + 1
     var InitIndex = dayiscommingIndex
+    if (Items.count == 0) {
+        dayiscommingIndex = -1
+        return
+    }
     if (dayiscommingIndex == -1) {
         curIndex = 0
         InitIndex = Items.count - 1
