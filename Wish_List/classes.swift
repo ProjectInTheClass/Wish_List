@@ -71,15 +71,110 @@ class Wish_Item {
     
 }
 
+class WishItem_Save: NSObject, NSCoding {
+    var name : String           //아이템 이름
+    var price : Int
+    var d_day : Date
+    var save : Int              //해당 목표물에 내가 투자한 금액
+    var favorite : Int         //즐겨찾기
+    var money_monthly : Int
+    var memo : String
+    
+    init(name: String, price: Int, d_day: Date, save: Int, favorite: Int, month: Int, memo:String){
+        self.name = name
+        self.price = price
+        self.d_day = d_day
+        self.save = save
+        self.favorite = favorite
+        self.money_monthly = month
+        self.memo = memo
+        //값을 집어넣을 때 예외처리를 해 주고 집어넣어야 함
+    }
+    required init?(coder aDecoder: NSCoder) {
+        self.name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
+        self.price = Int(aDecoder.decodeCInt(forKey: "price"))
+        self.d_day = (aDecoder.decodeObject(forKey: "d_day") as? Date)!
+        self.save = Int(aDecoder.decodeCInt(forKey: "save"))
+        self.favorite = Int(aDecoder.decodeCInt(forKey: "favorite"))
+        self.money_monthly = Int(aDecoder.decodeCInt(forKey: "month"))
+        self.memo = aDecoder.decodeObject(forKey: "memo") as? String ?? ""
+    }
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: "name")
+        aCoder.encode(memo, forKey: "memo")
+        aCoder.encode(price, forKey: "price")
+        aCoder.encode(save, forKey: "save")
+        aCoder.encode(favorite, forKey: "favorite")
+        aCoder.encode(money_monthly, forKey: "month")
+        aCoder.encode(d_day, forKey: "d_day")
+    }
+}
+
+class history_Save: NSObject, NSCoding {
+    var info : String           //금액 변동 원인
+    var money : Int             //얼마나 변동
+    var date : Date             //언제
+    var is_input : Int         //넣었냐 뺐냐
+    
+    init(info: String, money: Int, date: Date, is_input:Int){
+        //init 전에 예외처리를 하고 집어넣어야 함
+        self.info = info
+        self.money = money
+        self.date = date
+        self.is_input = is_input
+    }
+    required init?(coder aDecoder: NSCoder) {
+        self.info = aDecoder.decodeObject(forKey: "info") as? String ?? ""
+        self.date = (aDecoder.decodeObject(forKey: "date") as? Date)!
+        self.money = Int(aDecoder.decodeCInt(forKey: "money"))
+        self.is_input = Int(aDecoder.decodeCInt(forKey: "is_input"))
+    }
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(info, forKey: "info")
+        aCoder.encode(money, forKey: "money")
+        aCoder.encode(date, forKey: "date")
+        aCoder.encode(is_input, forKey: "is_input")
+    }
+}
+
+func saveWishItem(){
+    //test
+    var items:[WishItem_Save] = []
+    items.append(WishItem_Save(name: "a", price: 300, d_day: Date(), save: 100, favorite: 1, month: 3, memo: "hello1"))
+    items.append(WishItem_Save(name: "b", price: 500, d_day: Date(), save: 200, favorite: 0, month: 5, memo: "hello2"))
+    let wishdata = NSKeyedArchiver.archivedData(withRootObject: items)
+    UserDefaults.standard.set(wishdata, forKey: "wishitems")
+}
+
+func loadWishItem(){
+    //test
+    guard let wishData = UserDefaults.standard.object(forKey: "wishitems") as? NSData else {
+        print("errrrrror")
+        return
+    }
+    guard let wishArray = NSKeyedUnarchiver.unarchiveObject(with: wishData as Data) as? [WishItem_Save] else{
+        print("unarchive error")
+        return
+    }
+    for wish in wishArray {
+        print("")
+        print("name: \(wish.name)")
+    }
+}
+
+
+
 func makeDummy() -> [Wish_Item] {
+    saveWishItem()
+    loadWishItem()
     formatter.dateFormat = "yyyy/MM/dd"
     var Items:[Wish_Item]=[]
-    var car = Wish_Item(name: "차",favorite: false,img: UIImage(named:"car"))
+    let car = Wish_Item(name: "차",favorite: false,img: UIImage(named:"car"))
     car.price = 100000000
     car.save = 98000000
     car.d_day = formatter.date(from: "2018/06/01")
     Items += [car]
-    var notebook = Wish_Item(name: "노트북",favorite: true)
+    let notebook = Wish_Item(name: "노트북",favorite: true)
     notebook.price = 100000
     notebook.save = 10000
     notebook.d_day = formatter.date(from: "2018/06/01")
