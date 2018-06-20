@@ -83,6 +83,8 @@ class DetailViewController : UIViewController{
     @IBAction func Memo(_ sender: Any){
         Popmemo(memo : data!.data.memo)
     }
+
+    
     
     override func viewDidLoad() {
         Navibar?.topItem?.title = data?.data.name

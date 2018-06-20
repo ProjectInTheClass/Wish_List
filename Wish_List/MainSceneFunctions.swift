@@ -104,7 +104,12 @@ func getNextDayiscoming() {
 func refreshEndisnear() {
     var temp : Double
     for item in Items {
-        temp = Double(item.save) / Double(item.price!)
+        if item.price != nil{
+            temp = Double(item.save) / Double(item.price!)
+        }
+        else{
+            temp = 0
+        }
         if (temp > endisnearCriterion) {
             item.endisnear = true
             if (item.save >= item.price!) {
