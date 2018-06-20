@@ -81,7 +81,8 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         temp.favorite = isfavor
         
         Items.append(temp)
-        
+        // 저장
+        saveWishItem(WishList: Items)
         self.dismiss(animated: true, completion: nil)
     }
     

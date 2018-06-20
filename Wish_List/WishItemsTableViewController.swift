@@ -223,6 +223,7 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
             Items[(tappedIndexPath?.row)!].favorite = false
             sender.Favorite?.setImage(favn_img, for: .normal)
         }
+        saveWishItem(WishList: Items)
     }
 
     
@@ -250,8 +251,10 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
         if editingStyle == UITableViewCellEditingStyle.delete{
         Items.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            saveWishItem(WishList: Items)
         }
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 첫 번째 인자로 등록한 identifier, cell은 as 키워드로 앞서 만든 custom cell class화 해준다.
