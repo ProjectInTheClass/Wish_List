@@ -132,18 +132,55 @@ class WishItemsViewController : UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func sortByDeadlineFunction (a1:Wish_Item, a2:Wish_Item) -> Bool {
+        if (!a1.endflag && a2.endflag) {
+            return true
+        } else if (!a1.finishflag && a2.finishflag) {
+            return true
+        } else if (!a1.finishflag && !a2.finishflag && !a1.endflag && !a2.endflag && a1.d_day! < a2.d_day!) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func sortByProgressFunction (a1:Wish_Item, a2:Wish_Item) -> Bool {
+        if (!a1.endflag && a2.endflag) {
+            return true
+        } else if (!a1.finishflag && a2.finishflag) {
+            return true
+        } else if (!a1.finishflag && !a2.finishflag && !a1.endflag && !a2.endflag && (a1.price != nil && (a2.price == nil || Double(a1.save) / Double(a1.price!) > Double(a2.save) / Double(a2.price!)))) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func sortByPriceFunction (a1:Wish_Item, a2:Wish_Item) -> Bool {
+        if (!a1.endflag && a2.endflag) {
+            return true
+        } else if (!a1.finishflag && a2.finishflag) {
+            return true
+        } else if (!a1.finishflag && !a2.finishflag && !a1.endflag && !a2.endflag && (a1.price != nil && (a1.price != nil && (a2.price == nil || a1.price! < a2.price!)))) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     @IBAction func sortItemList(_ sender: Any) {
         let selectSortMethod = UIAlertController(title: "목록 정렬 방식", message: "", preferredStyle: .actionSheet)
         let sortByDeadline = UIAlertAction(title:"마감일에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
-            Items.sort(by: {$0.d_day! < $1.d_day!})
+            Items.sort(by: self.sortByDeadlineFunction)
             self.tableview?.reloadData()
         })
         let sortByPrice = UIAlertAction(title:"목표금액에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
-            Items.sort(by: {$0.price != nil && ($1.price == nil || $0.price! < $1.price!)})
+            Items.sort(by: self.sortByPriceFunction)
             self.tableview?.reloadData()
         })
         let sortByProgress = UIAlertAction(title:"달성도에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
-            Items.sort(by: {$0.price != nil && ($1.price == nil || Double($0.save) / Double($0.price!) > Double($1.save) / Double($1.price!))})
+            Items.sort(by: self.sortByProgressFunction)
             self.tableview?.reloadData()
         })
         

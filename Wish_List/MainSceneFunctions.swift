@@ -31,7 +31,7 @@ func getNextFavorite() {
             curIndex = 0
         }
         
-        if (Items[curIndex].favorite) {
+        if (Items[curIndex].favorite && !Items[curIndex].finishflag) { // 즐겨찾기는 마감일이 지나도 표시됩니다.
             favoriteIndex = curIndex
             break
         }
@@ -59,7 +59,7 @@ func getNextEndisnear() {
         if (curIndex >= Items.count) {
             curIndex = 0
         }
-        if (Items[curIndex].endisnear) {
+        if (Items[curIndex].endisnear && !Items[curIndex].finishflag && !Items[curIndex].endflag) {
             endisnearIndex = curIndex
             break
         }
@@ -87,7 +87,7 @@ func getNextDayiscoming() {
         if (curIndex >= Items.count) {
             curIndex = 0
         }
-        if (Items[curIndex].dayiscomming) {
+        if (Items[curIndex].dayiscomming && !Items[curIndex].endflag && !Items[curIndex].finishflag) {
             dayiscommingIndex = curIndex
             break
         }
@@ -105,6 +105,9 @@ func refreshEndisnear() {
         temp = Double(item.save) / Double(item.price!)
         if (temp > endisnearCriterion) {
             item.endisnear = true
+            if (item.save >= item.price!) {
+                item.finishflag = true
+            }
         } else {
             item.endisnear = false
         }
@@ -118,6 +121,9 @@ func refreshDayiscomming() {
         }
         if (Date().timeIntervalSince(item.d_day!) > -dayiscommingCriterion) {
             item.dayiscomming = true
+            if (Date().timeIntervalSince(item.d_day!) > 0) {
+                item.endflag = true
+            }
         } else {
             item.dayiscomming = false
         }
