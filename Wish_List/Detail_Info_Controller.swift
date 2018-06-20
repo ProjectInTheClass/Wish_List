@@ -73,6 +73,7 @@ class DetailViewController : UIViewController{
     
     @IBAction func ClickMinus(_ sender: Any) {
         Minussave(data : data!)
+        
     }
     
     @IBAction func ClickPlus(_ sender: Any) {
@@ -285,6 +286,8 @@ class DetailViewController : UIViewController{
             else {
                 addinput  = 0
             }
+            //여기서 하면 되나?
+            saveWishItem(WishList: Items)
             //
         }
         addController.addTextField { (textField) in
@@ -315,7 +318,7 @@ class DetailViewController : UIViewController{
             let minustextField = minusController.textFields![0] as UITextField
             let minusInfo = minusController.textFields![1] as UITextField
             minustextField.keyboardType = .decimalPad
-            if Int(minustextField.text!) != nil{
+            if Int(minustextField.text!) != nil {
                 if Int(minustextField.text!)! > data.save{
                     //경고문 띄우기 "저축금보다 많은 금액을 출금하실 수 없습니다!"
                     let money_out_alert = UIAlertController(title: "오류!", message: "저축금보다 많은 금액을 출금하실 수 없습니다!",preferredStyle: .alert)
@@ -346,6 +349,8 @@ class DetailViewController : UIViewController{
                 self.ProgressBar?.progress = percent
                 self.Lists?.reloadData()
                 }
+                //데이터 저장
+                saveWishItem(WishList: Items)
             }
             else {
                 
