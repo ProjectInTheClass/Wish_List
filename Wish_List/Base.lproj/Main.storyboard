@@ -212,6 +212,9 @@
                                 <rect key="frame" x="317" y="334" width="39" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="자세히"/>
+                                <connections>
+                                    <action selector="Memo:" destination="ebc-ey-gZQ" eventType="touchUpInside" id="Mry-wi-9Rp"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kuj-us-Aic">
                                 <rect key="frame" x="-3" y="614" width="378" height="53"/>
@@ -229,6 +232,9 @@
                                         <rect key="frame" x="253" y="8" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="삭제" image="delete"/>
+                                        <connections>
+                                            <action selector="delete" destination="ebc-ey-gZQ" eventType="touchUpInside" id="sAm-nN-PaU"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97812896573604058" green="0.97812896573604058" blue="0.97812896573604058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1054,6 +1060,9 @@
                                 <rect key="frame" x="331" y="81" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="favorite" image="favorite_not"/>
+                                <connections>
+                                    <action selector="fav_button:" destination="25S-tK-FdT" eventType="touchUpInside" id="7wL-y1-Sil"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kqp-9W-Ka5">
                                 <rect key="frame" x="15" y="81" width="128" height="128"/>
@@ -1071,6 +1080,7 @@
                         <viewLayoutGuide key="safeArea" id="UPa-cX-Hme"/>
                     </view>
                     <connections>
+                        <outlet property="Favorite" destination="MSf-xd-7mh" id="9A5-AU-0n2"/>
                         <outlet property="SPM" destination="b1G-ci-hnW" id="b3i-it-2ca"/>
                         <outlet property="deadline" destination="oIt-1i-fbA" id="3fG-TZ-7Tx"/>
                         <outlet property="goal" destination="zSf-8O-QYL" id="v86-s9-oAq"/>

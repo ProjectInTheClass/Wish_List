@@ -232,8 +232,8 @@ class MainSceneViewController: UIViewController {
             } else if (segue.identifier == "DayiscommingSegue") {
                 selectedIndex = dayiscommingIndex
             }
-            
-            nextVC.data = Items[selectedIndex]
+            let pushdata = dataNindex(index: selectedIndex, data: Items[selectedIndex])
+            nextVC.data = pushdata
         }
     }
 }

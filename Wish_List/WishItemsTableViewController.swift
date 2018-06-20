@@ -243,8 +243,8 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
         if let nextVC = segue.destination as? DetailViewController
         {
             let selectedIndex = self.tableview?.indexPathForSelectedRow?.row
-            
-            nextVC.data = Items[selectedIndex!]
+            let pushdata = dataNindex(index: selectedIndex! , data: Items[selectedIndex!])
+            nextVC.data = pushdata
         }
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -296,7 +296,7 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
         //else{
             var interval : Double
         var s = "-"
-            interval = (Items[indexPath.row].d_day?.timeIntervalSinceNow)!
+            interval = (Items[indexPath.row].d_day?.timeIntervalSinceNow)! + 86399
             interval = interval / 86400
         if interval < 0 {
             interval = interval * -1

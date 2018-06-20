@@ -28,12 +28,12 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func fav_button(_ sender: Any){
         if isfavor == false{
             isfavor = true
-            self.Favorite?.setImage(fav_img, for: .normal)
+            Favorite?.setImage(fav_img, for: .normal)
             
         }
         else{
             isfavor = false
-            self.Favorite?.setImage(favn_img, for: .normal)
+            Favorite?.setImage(favn_img, for: .normal)
         }
     }
     

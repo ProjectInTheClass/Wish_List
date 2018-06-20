@@ -20,6 +20,16 @@ enum sortMethod: Int {
 import Foundation
 import UIKit
 
+class dataNindex{
+    var index : Int
+    var data : Wish_Item
+    
+    init(index : Int, data : Wish_Item){
+        self.index = index
+        self.data = data
+    }
+}
+
 class history {
     var info : String           //금액 변동 원인
     var money : Int             //얼마나 변동
@@ -369,6 +379,6 @@ func getitem() -> [Wish_Item] {
 
 //var Items:[Wish_Item] = makeDummy()
 //var Items:[Wish_Item] = loadWishItem()
-//var Items:[Wish_Item] = []
-var Items:[Wish_Item] = getitem()
+var Items:[Wish_Item] = []
+//var Items:[Wish_Item] = getitem()
 let no = Items.count
