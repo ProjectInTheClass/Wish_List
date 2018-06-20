@@ -485,6 +485,6 @@ func loadAll() throws -> [Wish_Item]{
 
 //var Items:[Wish_Item] = makeDummy()
 //var Items:[Wish_Item] = loadWishItem()
-var Items:[Wish_Item] = []
-//var Items:[Wish_Item] = getitem()
+//var Items:[Wish_Item] = []
+var Items:[Wish_Item] = getitem()
 let no = Items.count
