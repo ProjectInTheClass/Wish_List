@@ -49,6 +49,11 @@ class MainSceneViewController: UIViewController {
         RefreshFavoriteCell()
     }
     
+    // 뷰 컨트롤러 내에서 오버라이드하여 사용합니다.
+    override var shouldAutorotate: Bool {
+        return false // or false
+    }
+    
     func RefreshFavoriteCell () {
         if (favoriteIndex == -1) {
             NoFavoriteView.isHidden = false

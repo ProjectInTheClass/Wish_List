@@ -576,7 +576,7 @@
         <!--목록-->
         <scene sceneID="Dtp-Ki-RB8">
             <objects>
-                <navigationController id="ElH-3o-8zW" sceneMemberID="viewController">
+                <navigationController id="ElH-3o-8zW" customClass="Navi" customModule="Wish_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="목록" id="6pK-KY-Nu9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DBO-a5-N70">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -590,10 +590,10 @@
             </objects>
             <point key="canvasLocation" x="1383" y="-797"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tabbar-->
         <scene sceneID="tY8-ZG-fZF">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="D94-wu-gos" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="D94-wu-gos" customClass="tabbar" customModule="Wish_List" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q8t-LU-Sxw">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

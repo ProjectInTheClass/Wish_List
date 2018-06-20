@@ -92,7 +92,10 @@ class Money_History_Controller: UIViewController{
         mode = 2
         self.Lists?.reloadData()
     }
-    
+    // 뷰 컨트롤러 내에서 오버라이드하여 사용합니다.
+    override var shouldAutorotate: Bool {
+        return false // or false
+    }
 }
 
 extension Money_History_Controller: UITableViewDataSource{

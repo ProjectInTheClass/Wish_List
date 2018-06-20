@@ -139,6 +139,9 @@ class ModifyViewController: UIViewController,UIImagePickerControllerDelegate, UI
         Imgview.layer.cornerRadius = (Imgview.frame.height) / 2
         Imgview.clipsToBounds = true
     }
-
-
+    
+    // 뷰 컨트롤러 내에서 오버라이드하여 사용합니다.
+    override var shouldAutorotate: Bool {
+        return false // or false
+    }
 }

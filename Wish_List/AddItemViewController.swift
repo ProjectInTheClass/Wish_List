@@ -18,6 +18,11 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var SPM : UITextField!
     @IBOutlet weak var Favorite: UIButton?
     
+    // 뷰 컨트롤러 내에서 오버라이드하여 사용합니다.
+    override var shouldAutorotate: Bool {
+        return false // or false
+    }
+    
     var isfavor = false
     let imagePicker = UIImagePickerController()
     let fav_img = UIImage(named: "favorite")

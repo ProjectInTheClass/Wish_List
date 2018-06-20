@@ -115,6 +115,11 @@ class WishItemsViewController : UIViewController{
     let fav_img = UIImage(named: "favorite")
     let favn_img = UIImage(named: "favorite_not")
     
+    // 뷰 컨트롤러 내에서 오버라이드하여 사용합니다.
+    override var shouldAutorotate: Bool {
+        return false // or false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

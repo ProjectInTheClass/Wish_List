@@ -23,6 +23,7 @@
 		EED5E8AD20C935A4001B5F6A /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED5E8AC20C935A4001B5F6A /* AddItemViewController.swift */; };
 		EED5E8AF20CA6517001B5F6A /* Detail_Info_Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED5E8AE20CA6517001B5F6A /* Detail_Info_Controller.swift */; };
 		EEEFE6B820D809E200D4345B /* Money_History_Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEFE6B720D809E200D4345B /* Money_History_Controller.swift */; };
+		EEEFE6BA20DA2E9300D4345B /* navicontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEFE6B920DA2E9300D4345B /* navicontroller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		EED5E8AC20C935A4001B5F6A /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		EED5E8AE20CA6517001B5F6A /* Detail_Info_Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail_Info_Controller.swift; sourceTree = "<group>"; };
 		EEEFE6B720D809E200D4345B /* Money_History_Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money_History_Controller.swift; sourceTree = "<group>"; };
+		EEEFE6B920DA2E9300D4345B /* navicontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = navicontroller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 				EED5E8AE20CA6517001B5F6A /* Detail_Info_Controller.swift */,
 				3B88DC4F20D2863C002388F2 /* ModifyViewController.swift */,
 				EEEFE6B720D809E200D4345B /* Money_History_Controller.swift */,
+				EEEFE6B920DA2E9300D4345B /* navicontroller.swift */,
 			);
 			path = Wish_List;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				EEBCE03420887C060033D5E7 /* ViewController.swift in Sources */,
 				EED5E8AD20C935A4001B5F6A /* AddItemViewController.swift in Sources */,
 				EE4DB90520AEC8610015EDC4 /* Functions.swift in Sources */,
+				EEEFE6BA20DA2E9300D4345B /* navicontroller.swift in Sources */,
 				3B88DC5020D2863C002388F2 /* ModifyViewController.swift in Sources */,
 				EEBCE03220887C060033D5E7 /* AppDelegate.swift in Sources */,
 			);

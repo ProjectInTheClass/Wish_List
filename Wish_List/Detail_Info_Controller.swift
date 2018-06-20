@@ -84,7 +84,10 @@ class DetailViewController : UIViewController{
         Popmemo(memo : data!.data.memo)
     }
 
-    
+    // 뷰 컨트롤러 내에서 오버라이드하여 사용합니다.
+    override var shouldAutorotate: Bool {
+        return false // or false
+    }
     
     override func viewDidLoad() {
         Navibar?.topItem?.title = data?.data.name
