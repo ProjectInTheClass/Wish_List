@@ -341,6 +341,70 @@ func makeDummy() -> [Wish_Item] {
     return Items
 }
 */
+func saveItem(item: Wish_Item){
+    formatter.dateFormat = "yyyy/MM/dd"
+    var price = 0
+    var month = 0
+    var memo = ""
+    let name = item.name
+    let favor = item.favorite ? 1 : 0
+    let save = item.save
+    let date = formatter.string(from: item.d_day!)
+        //check nil
+    if let wprice = item.price {
+        price = wprice
+    }
+    if let wmonth = item.money_monthly {
+        month = wmonth
+    }
+    if let wmemo = item.memo {
+        memo = wmemo
+    }
+        
+    saveHistory(name: item.name, histories: item.m_info)
+    let saveitem = WishItem_Save(name: name, price: price, d_day: date, save: save, favorite: favor, month: month, memo: memo, img: item.img!)
+    
+    let itemdata = NSKeyedArchiver.archivedData(withRootObject: saveitem)
+    UserDefaults.standard.set(itemdata, forKey: "item_\(item.name)")
+}
+
+func loadItem(name:String) throws -> Wish_Item{
+    formatter.dateFormat = "yyyy/MM/dd"
+    guard let itemdata = UserDefaults.standard.object(forKey: "item_\(name)") as? NSData else {
+        print("error in loadWishItem")
+        throw readSaveError.nodata
+    }
+    guard let wish_save = NSKeyedUnarchiver.unarchiveObject(with: itemdata as Data) as? WishItem_Save else{
+        print("error in unarchive wishitems")
+        throw readSaveError.unarchive
+    }
+    
+    let favor = wish_save.favorite == 1 ? true : false
+    let item = Wish_Item(name: wish_save.name, favorite: favor)
+    let date = formatter.date(from: wish_save.d_day)
+    item.d_day = date
+    item.save = wish_save.save
+    if wish_save.price != 0 {
+        item.price = wish_save.price
+    }
+    if wish_save.money_monthly != 0 {
+        item.money_monthly = wish_save.money_monthly
+    }
+    if !wish_save.memo.isEmpty {
+        item.memo = wish_save.memo
+    }
+    item.img = UIImage(data: wish_save.img)
+    
+    do {
+        try item.m_info = loadHistory(name: wish_save.name)
+    } catch readSaveError.nodata{
+        print("no data")
+    } catch readSaveError.unarchive{
+        print("can not unarchive")
+    }
+    
+    return item
+}
 
 let formatter = DateFormatter()
 
