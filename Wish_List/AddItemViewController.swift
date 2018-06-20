@@ -18,6 +18,11 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var SPM : UITextField!
     @IBOutlet weak var Favorite: UIButton?
     
+    // 뷰 컨트롤러 내에서 오버라이드하여 사용합니다.
+    override var shouldAutorotate: Bool {
+        return false // or false
+    }
+    
     var isfavor = false
     let imagePicker = UIImagePickerController()
     let fav_img = UIImage(named: "favorite")
@@ -28,12 +33,12 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func fav_button(_ sender: Any){
         if isfavor == false{
             isfavor = true
-            self.Favorite?.setImage(fav_img, for: .normal)
+            Favorite?.setImage(fav_img, for: .normal)
             
         }
         else{
             isfavor = false
-            self.Favorite?.setImage(favn_img, for: .normal)
+            Favorite?.setImage(favn_img, for: .normal)
         }
     }
     
@@ -82,7 +87,9 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         Items.append(temp)
         // 저장
-        saveWishItem(WishList: Items)
+        //saveWishItem(WishList: Items)
+        saveItem(item: temp)
+        saveName(wishlist: Items)
         self.dismiss(animated: true, completion: nil)
     }
     

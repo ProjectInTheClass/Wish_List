@@ -214,6 +214,9 @@
                                 <rect key="frame" x="317" y="334" width="39" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="자세히"/>
+                                <connections>
+                                    <action selector="Memo:" destination="ebc-ey-gZQ" eventType="touchUpInside" id="Mry-wi-9Rp"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kuj-us-Aic">
                                 <rect key="frame" x="-3" y="614" width="378" height="53"/>
@@ -231,6 +234,9 @@
                                         <rect key="frame" x="253" y="8" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="삭제" image="delete"/>
+                                        <connections>
+                                            <action selector="delete" destination="ebc-ey-gZQ" eventType="touchUpInside" id="sAm-nN-PaU"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97812896573604058" green="0.97812896573604058" blue="0.97812896573604058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -402,6 +408,14 @@
                                 <rect key="frame" x="7" y="116" width="137" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZpJ-sn-zKA">
+                                <rect key="frame" x="11" y="116" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="selectImage:" destination="eoO-vb-5Up" eventType="touchUpInside" id="6eh-AT-ffs"/>
+                                    <action selector="selectImage:" destination="25S-tK-FdT" eventType="touchUpInside" id="mwL-xx-fjL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="wbu-aP-EiX"/>
@@ -564,7 +578,7 @@
         <!--목록-->
         <scene sceneID="Dtp-Ki-RB8">
             <objects>
-                <navigationController id="ElH-3o-8zW" sceneMemberID="viewController">
+                <navigationController id="ElH-3o-8zW" customClass="Navi" customModule="Wish_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="목록" id="6pK-KY-Nu9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DBO-a5-N70">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -578,10 +592,10 @@
             </objects>
             <point key="canvasLocation" x="1383" y="-797"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tabbar-->
         <scene sceneID="tY8-ZG-fZF">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="D94-wu-gos" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="D94-wu-gos" customClass="tabbar" customModule="Wish_List" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q8t-LU-Sxw">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -1211,6 +1225,9 @@
                                 <rect key="frame" x="331" y="81" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="favorite" image="favorite_not"/>
+                                <connections>
+                                    <action selector="fav_button:" destination="25S-tK-FdT" eventType="touchUpInside" id="7wL-y1-Sil"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kqp-9W-Ka5">
                                 <rect key="frame" x="15" y="81" width="128" height="128"/>
@@ -1228,6 +1245,7 @@
                         <viewLayoutGuide key="safeArea" id="UPa-cX-Hme"/>
                     </view>
                     <connections>
+                        <outlet property="Favorite" destination="MSf-xd-7mh" id="9A5-AU-0n2"/>
                         <outlet property="SPM" destination="b1G-ci-hnW" id="b3i-it-2ca"/>
                         <outlet property="deadline" destination="oIt-1i-fbA" id="3fG-TZ-7Tx"/>
                         <outlet property="goal" destination="zSf-8O-QYL" id="v86-s9-oAq"/>

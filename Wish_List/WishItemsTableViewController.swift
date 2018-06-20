@@ -115,6 +115,11 @@ class WishItemsViewController : UIViewController{
     let fav_img = UIImage(named: "favorite")
     let favn_img = UIImage(named: "favorite_not")
     
+    // 뷰 컨트롤러 내에서 오버라이드하여 사용합니다.
+    override var shouldAutorotate: Bool {
+        return false // or false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -223,7 +228,8 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
             Items[(tappedIndexPath?.row)!].favorite = false
             sender.Favorite?.setImage(favn_img, for: .normal)
         }
-        saveWishItem(WishList: Items)
+        //saveWishItem(WishList: Items)
+        saveItem(item: Items[(tappedIndexPath?.row)!])
     }
 
     
@@ -243,15 +249,15 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
         if let nextVC = segue.destination as? DetailViewController
         {
             let selectedIndex = self.tableview?.indexPathForSelectedRow?.row
-            
-            nextVC.data = Items[selectedIndex!]
+            let pushdata = dataNindex(index: selectedIndex! , data: Items[selectedIndex!])
+            nextVC.data = pushdata
         }
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete{
         Items.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-            saveWishItem(WishList: Items)
+            saveName(wishlist: Items)
         }
     }
 
@@ -296,7 +302,7 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
         //else{
             var interval : Double
         var s = "-"
-            interval = (Items[indexPath.row].d_day?.timeIntervalSinceNow)!
+            interval = (Items[indexPath.row].d_day?.timeIntervalSinceNow)! + 86399
             interval = interval / 86400
         if interval < 0 {
             interval = interval * -1
