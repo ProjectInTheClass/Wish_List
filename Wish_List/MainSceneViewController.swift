@@ -63,13 +63,16 @@ class MainSceneViewController: UIViewController {
         }
         NoFavoriteView.isHidden = true
         FavoriteImage.image = Items[favoriteIndex].img
-        
         FavoriteName.text = Items[favoriteIndex].name
         FavoriteDeadline.text = formatter.string(from: Items[favoriteIndex].d_day!)
         FavoriteSaved.text = String(Items[favoriteIndex].save) + "원"
-        FavoriteGoal.text = String(Items[favoriteIndex].price!) + "원"
-        FavoriteProgressBar.progress = Float(Items[favoriteIndex].save) / Float(Items[favoriteIndex].price!)
-        
+        if (Items[favoriteIndex].price == nil) {
+            FavoriteGoal.text = "가격 미상"
+            FavoriteProgressBar.progress = 0.0
+        } else {
+            FavoriteGoal.text = String(Items[favoriteIndex].price!) + "원"
+            FavoriteProgressBar.progress = Float(Items[favoriteIndex].save) / Float(Items[favoriteIndex].price!)
+        }
         FavoriteProgress.text = String(Int((FavoriteProgressBar.progress * 100).rounded())) + "%"
     }
     
@@ -95,8 +98,13 @@ class MainSceneViewController: UIViewController {
         EndisnearName.text = Items[endisnearIndex].name
         EndisnearDeadline.text = formatter.string(from: Items[endisnearIndex].d_day!)
         EndisnearSaved.text = String(Items[endisnearIndex].save) + "원"
-        EndisnearGoal.text = String(Items[endisnearIndex].price!) + "원"
-        EndisnearProgressBar.progress = Float(Items[endisnearIndex].save) / Float(Items[endisnearIndex].price!)
+        if (Items[endisnearIndex].price == nil) {
+            EndisnearGoal.text = "가격 미상"
+            EndisnearProgressBar.progress = 0.0
+        } else {
+            EndisnearGoal.text = String(Items[endisnearIndex].price!) + "원"
+            EndisnearProgressBar.progress = Float(Items[endisnearIndex].save) / Float(Items[endisnearIndex].price!)
+        }
         EndisnearProgress.text = String(Int((EndisnearProgressBar.progress * 100).rounded())) + "%"
     }
     
@@ -122,8 +130,13 @@ class MainSceneViewController: UIViewController {
         DayiscommingName.text = Items[dayiscommingIndex].name
         DayiscommingDeadline.text = formatter.string(from: Items[dayiscommingIndex].d_day!)
         DayiscommingSaved.text = String(Items[dayiscommingIndex].save) + "원"
-        DayiscommingGoal.text = String(Items[dayiscommingIndex].price!) + "원"
-        DayiscommingProgressBar.progress = Float(Items[dayiscommingIndex].save) / Float(Items[dayiscommingIndex].price!)
+        if (Items[dayiscommingIndex].price == nil) {
+            DayiscommingGoal.text = "가격 미상"
+            DayiscommingProgressBar.progress = 0.0
+        } else {
+            DayiscommingGoal.text = String(Items[dayiscommingIndex].price!) + "원"
+            DayiscommingProgressBar.progress = Float(Items[dayiscommingIndex].save) / Float(Items[dayiscommingIndex].price!)
+        }
         DayiscommingProgress.text = String(Int((DayiscommingProgressBar.progress * 100).rounded())) + "%"
     }
     
