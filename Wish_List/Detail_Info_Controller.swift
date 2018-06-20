@@ -68,7 +68,7 @@ class DetailViewController : UIViewController{
     
     @IBAction func delete(){
         Items.remove(at: (data?.index)!)
-        saveWishItem(WishList: Items)
+        saveName(wishlist: Items)
         self.dismiss(animated: true, completion: nil)
     }
     
