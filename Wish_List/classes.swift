@@ -11,6 +11,12 @@ enum readSaveError: Error {
     case unarchive
 }
 
+enum sortMethod: Int {
+    case deadline
+    case price
+    case progress
+}
+
 import Foundation
 import UIKit
 

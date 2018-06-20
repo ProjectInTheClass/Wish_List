@@ -15,6 +15,8 @@ var favoriteIndex = -1
 var endisnearIndex = -1
 var dayiscommingIndex = -1
 
+var howToSort = sortMethod.deadline
+
 func getNextFavorite() {
     var curIndex = favoriteIndex + 1
     var InitIndex = favoriteIndex
