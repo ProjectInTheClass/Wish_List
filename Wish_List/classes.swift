@@ -276,6 +276,8 @@ func makeDummy() -> [Wish_Item] {
     car.price = 100000000
     car.save = 98000000
     car.d_day = formatter.date(from: "2018/06/01")
+    let a = history(info: "ddd", money: 10000, date: formatter.date(from: "2018/06/01")!, is_input: true)
+    car.m_info.append(a)
     Items += [car]
     let notebook = Wish_Item(name: "노트북",favorite: true)
     notebook.price = 100000
