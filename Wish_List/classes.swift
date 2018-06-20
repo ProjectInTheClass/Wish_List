@@ -11,8 +11,24 @@ enum readSaveError: Error {
     case unarchive
 }
 
+enum sortMethod: Int {
+    case deadline
+    case price
+    case progress
+}
+
 import Foundation
 import UIKit
+
+class dataNindex{
+    var index : Int
+    var data : Wish_Item
+    
+    init(index : Int, data : Wish_Item){
+        self.index = index
+        self.data = data
+    }
+}
 
 class history {
     var info : String           //금액 변동 원인
@@ -469,8 +485,6 @@ func loadAll() throws -> [Wish_Item]{
 
 //var Items:[Wish_Item] = makeDummy()
 //var Items:[Wish_Item] = loadWishItem()
-//var Items:[Wish_Item] = []
-var Items:[Wish_Item] = getitem()
-
-
+var Items:[Wish_Item] = []
+//var Items:[Wish_Item] = getitem()
 let no = Items.count

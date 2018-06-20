@@ -15,6 +15,8 @@ var favoriteIndex = -1
 var endisnearIndex = -1
 var dayiscommingIndex = -1
 
+var howToSort = sortMethod.deadline
+
 func getNextFavorite() {
     var curIndex = favoriteIndex + 1
     var InitIndex = favoriteIndex
@@ -102,7 +104,12 @@ func getNextDayiscoming() {
 func refreshEndisnear() {
     var temp : Double
     for item in Items {
-        temp = Double(item.save) / Double(item.price!)
+        if item.price != nil{
+            temp = Double(item.save) / Double(item.price!)
+        }
+        else{
+            temp = 0
+        }
         if (temp > endisnearCriterion) {
             item.endisnear = true
             if (item.save >= item.price!) {

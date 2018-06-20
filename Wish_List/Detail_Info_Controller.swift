@@ -43,7 +43,7 @@ class Detail_info_CellView:UITableViewCell{
 }
 
 class DetailViewController : UIViewController{
-    var data:Wish_Item?;
+    var data:dataNindex?;
     @IBOutlet weak var IMG : UIImageView?
     @IBOutlet weak var Money: UILabel?  //남은 돈
     @IBOutlet weak var MPD: UILabel?    //Money per day
@@ -67,21 +67,27 @@ class DetailViewController : UIViewController{
     }
     
     @IBAction func delete(){
-        
+        Items.remove(at: (data?.index)!)
+        saveWishItem(WishList: Items)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func ClickMinus(_ sender: Any) {
-        Minussave(data : data!)
-        
+        Minussave(data : data!.data)
     }
     
     @IBAction func ClickPlus(_ sender: Any) {
-        Addsave(data : data!)
+        Addsave(data : data!.data)
     }
     
+    @IBAction func Memo(_ sender: Any){
+        Popmemo(memo : data!.data.memo)
+    }
+
+    
+    
     override func viewDidLoad() {
-        Navibar?.topItem?.title = data?.name
+        Navibar?.topItem?.title = data?.data.name
         
         Lists?.dataSource = self
         Lists?.delegate = self
@@ -96,8 +102,8 @@ class DetailViewController : UIViewController{
         self.view.insertSubview(backgroundImage, at: 0)
         back?.layer.borderWidth = 1
         let money : Int
-        if data?.price != nil{
-            money = (data?.price)! - (data?.save)!
+        if data?.data.price != nil{
+            money = (data?.data.price)! - (data?.data.save)!
             Money?.text = money.description + "원"
             Money?.adjustsFontSizeToFitWidth = true
             Money?.minimumScaleFactor = 0.2
@@ -107,16 +113,19 @@ class DetailViewController : UIViewController{
             Money?.text = "가격 미상"
         }
         var interval : Double
-        IMG?.image = data?.img
+        IMG?.image = data?.data.img
         
-        if data?.d_day != nil{
-            interval = (data?.d_day?.timeIntervalSinceNow)!
+        if data?.data.d_day != nil{
+            
+            interval = (data?.data.d_day?.timeIntervalSinceNow)! + 86399
             interval = interval / 86400
-            if interval < 0 {
+            let day = Int(interval)
+            if interval <= 0 {
                 MPD?.text = "기한 만료됨"
             }
+           
             else{
-                MPD?.text = (Int(Double(money)/interval)).description + "원"
+                MPD?.text = (Int(Double(money)/Double(day+1))).description + "원"
                 MPD?.adjustsFontSizeToFitWidth = true
                 MPD?.minimumScaleFactor = 0.2
             }
@@ -131,30 +140,35 @@ class DetailViewController : UIViewController{
             MPD?.text = "날짜 미정"
             D_day?.text = "날짜 미정"
         }
-        SPM?.text = (data?.money_monthly?.description)! + "원"
+        if data?.data.money_monthly != nil{
+            SPM?.text = (data?.data.money_monthly?.description)! + "원"
+        }
+        else{
+            SPM?.text = "0" + "원"
+        }
         SPM?.adjustsFontSizeToFitWidth = true
         SPM?.minimumScaleFactor = 0.2
         
-        E_day?.text = formatter.string(from: (data?.d_day!)!)
-        Save?.text = data?.save.description
-        if data?.price != nil{
-            Price?.text = data?.price?.description
+        E_day?.text = formatter.string(from: (data?.data.d_day!)!)
+        Save?.text = data?.data.save.description
+        if data?.data.price != nil{
+            Price?.text = data?.data.price?.description
         }
         else{
             Price?.text = "가격 미상"
         }
-        let percent = progress(lists:data!)
+        let percent = progress(lists:data!.data)
         Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
         ProgressBar?.progress = percent
-        Memo?.text = data?.memo
+        Memo?.text = data?.data.memo
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        Navibar?.topItem?.title = data?.name
+        Navibar?.topItem?.title = data?.data.name
         self.Lists?.reloadData()
         let money : Int
-        if data?.price != nil{
-            money = (data?.price)! - (data?.save)!
+        if data?.data.price != nil{
+            money = (data?.data.price)! - (data?.data.save)!
             Money?.text = money.description + "원"
             Money?.adjustsFontSizeToFitWidth = true
             Money?.minimumScaleFactor = 0.2
@@ -164,16 +178,17 @@ class DetailViewController : UIViewController{
             Money?.text = "가격 미상"
         }
         var interval : Double
-        IMG?.image = data?.img
+        IMG?.image = data?.data.img
         
-        if data?.d_day != nil{
-            interval = (data?.d_day?.timeIntervalSinceNow)!
+        if data?.data.d_day != nil{
+            interval = (data?.data.d_day?.timeIntervalSinceNow)! + 86399
             interval = interval / 86400
-            if interval < 0 {
+            let day = Int(interval)
+            if interval <= 0 {
                 MPD?.text = "기한 만료됨"
             }
             else{
-                MPD?.text = (Int(Double(money)/interval)).description + "원"
+                MPD?.text = (Int(Double(money)/Double(day+1))).description + "원"
                 MPD?.adjustsFontSizeToFitWidth = true
                 MPD?.minimumScaleFactor = 0.2
             }
@@ -188,31 +203,35 @@ class DetailViewController : UIViewController{
             MPD?.text = "날짜 미정"
             D_day?.text = "날짜 미정"
         }
-        SPM?.text = (data?.money_monthly?.description)! + "원"
-        
-        E_day?.text = formatter.string(from: (data?.d_day!)!)
-        Save?.text = data?.save.description
-        if data?.price != nil{
-            Price?.text = data?.price?.description
+        if data?.data.money_monthly != nil{
+            SPM?.text = (data?.data.money_monthly?.description)! + "원"
+        }
+        else{
+            SPM?.text = "0원"
+        }
+        E_day?.text = formatter.string(from: (data?.data.d_day!)!)
+        Save?.text = data?.data.save.description
+        if data?.data.price != nil{
+            Price?.text = data?.data.price?.description
         }
         else{
             Price?.text = "가격 미상"
         }
-        let percent = progress(lists:data!)
+        let percent = progress(lists:data!.data)
         Percentage?.text = String(format: "%.1f",(percent*100)) + "%"
         ProgressBar?.progress = percent
-        Memo?.text = data?.memo
+        Memo?.text = data?.data.memo
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nextVC = segue.destination as? ModifyViewController
         {
-            nextVC.data = data
+            nextVC.data = data?.data
         }
         if let nextVC = segue.destination as? Money_History_Controller
         {
-            nextVC.data = data
+            nextVC.data = data?.data
         }
     }
     
@@ -248,6 +267,21 @@ class DetailViewController : UIViewController{
         Imgview.layer.borderColor = UIColor.black.cgColor
         Imgview.layer.cornerRadius = (Imgview.frame.height) / 2
         Imgview.clipsToBounds = true
+    }
+    
+    func Popmemo(memo : String?){
+        let popController:UIAlertController
+        if memo != nil{
+            popController = UIAlertController(title: "메모 내용", message: memo, preferredStyle: .alert)
+        }
+        else{
+            popController = UIAlertController(title: "메모 내용", message: "", preferredStyle: .alert)
+        }
+        let confirm = UIAlertAction(title: "확인", style: .default) { (action:UIAlertAction) in
+            
+        }
+        popController.addAction(confirm)
+        self.present(popController, animated: true, completion: nil)
     }
     
     func Addsave(data : Wish_Item){
@@ -382,7 +416,7 @@ extension DetailViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return proj.count
-        return (data?.m_info.count)!
+        return (data?.data.m_info.count)!
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -394,8 +428,8 @@ extension DetailViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 첫 번째 인자로 등록한 identifier, cell은 as 키워드로 앞서 만든 custom cell class화 해준다.
         let cell = Lists?.dequeueReusableCell(withIdentifier: "histories", for: indexPath as IndexPath) as! Detail_info_CellView // 위 작업을 마치면 커스텀 클래스의 outlet을 사용할 수 있다.
-        let index = (data?.m_info.count)! - 1 - indexPath.row
-        if data?.m_info[index].is_input == true{
+        let index = (data?.data.m_info.count)! - 1 - indexPath.row
+        if data?.data.m_info[index].is_input == true{
             cell.Money?.textColor = UIColor.blue
             cell.Reason?.textColor = UIColor.blue
         }
@@ -404,10 +438,10 @@ extension DetailViewController: UITableViewDataSource{
             cell.Reason?.textColor = UIColor.red
         }
         
-        cell.Day?.text = formatter.string(from: (data?.m_info[index].date)!)
+        cell.Day?.text = formatter.string(from: (data?.data.m_info[index].date)!)
         
-        cell.Money?.text = data?.m_info[index].money.description
-        cell.Reason?.text = data?.m_info[index].info
+        cell.Money?.text = data?.data.m_info[index].money.description
+        cell.Reason?.text = data?.data.m_info[index].info
         return cell
     }
 }

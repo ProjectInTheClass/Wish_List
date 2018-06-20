@@ -169,19 +169,30 @@ class WishItemsViewController : UIViewController{
         }
     }
     
+    func sortItems() {
+        if (howToSort == sortMethod.deadline) {
+            Items.sort(by: self.sortByDeadlineFunction)
+        } else if (howToSort == sortMethod.price) {
+            Items.sort(by: self.sortByPriceFunction)
+        } else if (howToSort == sortMethod.progress) {
+            Items.sort(by: self.sortByProgressFunction)
+        }
+        self.tableview?.reloadData()
+    }
+    
     @IBAction func sortItemList(_ sender: Any) {
         let selectSortMethod = UIAlertController(title: "목록 정렬 방식", message: "", preferredStyle: .actionSheet)
         let sortByDeadline = UIAlertAction(title:"마감일에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
-            Items.sort(by: self.sortByDeadlineFunction)
-            self.tableview?.reloadData()
+            howToSort = sortMethod.deadline
+            self.sortItems()
         })
         let sortByPrice = UIAlertAction(title:"목표금액에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
-            Items.sort(by: self.sortByPriceFunction)
-            self.tableview?.reloadData()
+            howToSort = sortMethod.price
+            self.sortItems()
         })
         let sortByProgress = UIAlertAction(title:"달성도에 따라 정렬", style:.default, handler: {(action:UIAlertAction) -> Void in
-            Items.sort(by: self.sortByProgressFunction)
-            self.tableview?.reloadData()
+            howToSort = sortMethod.progress
+            self.sortItems()
         })
         
         selectSortMethod.addAction(sortByDeadline)
@@ -196,6 +207,7 @@ class WishItemsViewController : UIViewController{
             proj.append(tmpItem)
             self.tableview?.reloadData()
         }*/
+        sortItems()
         self.tableview?.reloadData()
     }
 }
@@ -232,8 +244,8 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
         if let nextVC = segue.destination as? DetailViewController
         {
             let selectedIndex = self.tableview?.indexPathForSelectedRow?.row
-            
-            nextVC.data = Items[selectedIndex!]
+            let pushdata = dataNindex(index: selectedIndex! , data: Items[selectedIndex!])
+            nextVC.data = pushdata
         }
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -285,7 +297,7 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
         //else{
             var interval : Double
         var s = "-"
-            interval = (Items[indexPath.row].d_day?.timeIntervalSinceNow)!
+            interval = (Items[indexPath.row].d_day?.timeIntervalSinceNow)! + 86399
             interval = interval / 86400
         if interval < 0 {
             interval = interval * -1
