@@ -150,6 +150,47 @@ class history_Save: NSObject, NSCoding {
     }
 }
 
+class nameList: NSObject, NSCoding {
+    
+    var list: [String] = []
+    
+    init(list:[String]) {
+        for name in list {
+            self.list.append(name)
+        }
+    }
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(list, forKey: "name")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.list = [aDecoder.decodeObject(forKey: "name") as? String ?? ""]
+    }
+}
+//모든 항목들의 이름을 저장하는 함수
+//데이터가 추가될때마다 불러줘야 함
+func saveName(wishlist:[Wish_Item]) {
+    var namelist:[String] = []
+    for wishitem in wishlist {
+        namelist.append(wishitem.name)
+        print("savename:\(wishitem.name)")
+    }
+    let namedata = NSKeyedArchiver.archivedData(withRootObject: namelist)
+    UserDefaults.standard.set(namedata, forKey: "namelist")
+}
+func loadName() throws -> [String]{
+    formatter.dateFormat = "yyyy/MM/dd"
+    guard let nameData = UserDefaults.standard.object(forKey: "namelist") as? NSData else {
+        print("error in loadname")
+        throw readSaveError.nodata
+    }
+    guard let nameList = NSKeyedUnarchiver.unarchiveObject(with: nameData as Data) as? [String] else{
+        print("error in unarchive namedata")
+        throw readSaveError.unarchive
+    }
+    
+    return nameList
+}
 
 //(이름)_history key 로 저장
 func saveHistory(name:String, histories: [history]){
@@ -186,27 +227,6 @@ func loadHistory(name:String) throws -> [history]{
     return his
 }
 
-/*
- 
- if let image = UIImage(named: "example.png") {
-    if let data = UIImagePNGRepresentation(image) {
-        let filename = getDocumentsDirectory().appendingPathComponent("copy.png")
-        try? data.write(to: filename)
-    }
- }
- 
- */
-func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
-}
-/*
-func convertImage(img:UIImage) -> String {
-    if let data = UIImagePNGRepresentation(img) {
-        let filename = getDocumentsDirectory().appendingPathComponent(<#T##pathComponent: String##String#>, isDirectory: <#T##Bool#>)
-    }
-}
-*/
 //wishitems key로 저장함
 func saveWishItem(WishList: [Wish_Item]){
     formatter.dateFormat = "yyyy/MM/dd"
@@ -286,7 +306,7 @@ func loadWishItem() throws -> [Wish_Item]{
     return wish
 }
 
-/*
+
 func makeDummy() -> [Wish_Item] {
     formatter.dateFormat = "yyyy/MM/dd"
     var Items:[Wish_Item]=[]
@@ -340,7 +360,7 @@ func makeDummy() -> [Wish_Item] {
     saveWishItem(WishList: Items)
     return Items
 }
-*/
+
 func saveItem(item: Wish_Item){
     formatter.dateFormat = "yyyy/MM/dd"
     var price = 0
@@ -365,12 +385,12 @@ func saveItem(item: Wish_Item){
     let saveitem = WishItem_Save(name: name, price: price, d_day: date, save: save, favorite: favor, month: month, memo: memo, img: item.img!)
     
     let itemdata = NSKeyedArchiver.archivedData(withRootObject: saveitem)
-    UserDefaults.standard.set(itemdata, forKey: "item_\(item.name)")
+    UserDefaults.standard.set(itemdata, forKey: "\(item.name)_item")
 }
 
 func loadItem(name:String) throws -> Wish_Item{
     formatter.dateFormat = "yyyy/MM/dd"
-    guard let itemdata = UserDefaults.standard.object(forKey: "item_\(name)") as? NSData else {
+    guard let itemdata = UserDefaults.standard.object(forKey: "\(name)_item") as? NSData else {
         print("error in loadWishItem")
         throw readSaveError.nodata
     }
@@ -413,7 +433,7 @@ func getitem() -> [Wish_Item] {
     var Item:[Wish_Item] = []
     
     do {
-        try Item = loadWishItem()
+        try Item = loadAll()
     } catch readSaveError.nodata{
         print("no data")
     } catch readSaveError.unarchive{
@@ -425,8 +445,32 @@ func getitem() -> [Wish_Item] {
     return Item
 }
 
+func loadAll() throws -> [Wish_Item]{
+    formatter.dateFormat = "yyyy/MM/dd"
+    var wish:[Wish_Item] = []
+    var item:Wish_Item
+    var namelist = try loadName()
+    for name in namelist {
+        print("have name here!")
+        do {
+            try item = loadItem(name: name)
+        } catch readSaveError.nodata{
+            print("no data")
+            throw readSaveError.nodata
+        } catch readSaveError.unarchive{
+            print("can not unarchive")
+            throw readSaveError.unarchive
+        }
+        wish.append(item)
+    }
+    
+    return wish
+}
+
 //var Items:[Wish_Item] = makeDummy()
 //var Items:[Wish_Item] = loadWishItem()
 //var Items:[Wish_Item] = []
 var Items:[Wish_Item] = getitem()
+
+
 let no = Items.count

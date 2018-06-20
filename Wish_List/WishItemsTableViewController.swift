@@ -211,7 +211,8 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
             Items[(tappedIndexPath?.row)!].favorite = false
             sender.Favorite?.setImage(favn_img, for: .normal)
         }
-        saveWishItem(WishList: Items)
+        //saveWishItem(WishList: Items)
+        saveItem(item: Items[(tappedIndexPath?.row)!])
     }
 
     
@@ -239,7 +240,7 @@ extension WishItemsViewController: UITableViewDataSource, CellButton{
         if editingStyle == UITableViewCellEditingStyle.delete{
         Items.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-            saveWishItem(WishList: Items)
+            saveName(wishlist: Items)
         }
     }
 

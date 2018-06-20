@@ -52,7 +52,9 @@ class ModifyViewController: UIViewController {
         }
         
         //  변경될때마다 세이브
-        saveWishItem(WishList: Items)
+        //saveWishItem(WishList: Items)
+        saveItem(item: data!)
+        saveName(wishlist: Items)
         self.dismiss(animated: true, completion: nil)
     }
     

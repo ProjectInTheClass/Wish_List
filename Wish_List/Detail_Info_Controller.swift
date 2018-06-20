@@ -287,7 +287,8 @@ class DetailViewController : UIViewController{
                 addinput  = 0
             }
             //여기서 하면 되나?
-            saveWishItem(WishList: Items)
+            //saveWishItem(WishList: Items)
+            saveItem(item: data)
             //
         }
         addController.addTextField { (textField) in
@@ -350,7 +351,8 @@ class DetailViewController : UIViewController{
                 self.Lists?.reloadData()
                 }
                 //데이터 저장
-                saveWishItem(WishList: Items)
+                //saveWishItem(WishList: Items)
+                saveItem(item: data)
             }
             else {
                 
