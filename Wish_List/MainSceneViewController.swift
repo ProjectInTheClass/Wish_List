@@ -82,6 +82,7 @@ class MainSceneViewController: UIViewController {
     }
     
     @IBAction func EndisnearRefresh(_ sender: Any) {
+        refreshEndisnear()
         getNextEndisnear()
         RefreshEndisnearCell()
     }
@@ -114,6 +115,7 @@ class MainSceneViewController: UIViewController {
     }
     
     @IBAction func DayiscommingRefresh(_ sender: Any) {
+        refreshDayiscomming()
         getNextDayiscoming()
         RefreshDayiscommingCell()
     }
