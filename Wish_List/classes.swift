@@ -84,10 +84,9 @@ class WishItem_Save: NSObject, NSCoding {
     var favorite : Int         //즐겨찾기
     var money_monthly : Int
     var memo : String
-    var img : String
-    var temp : UIImage
+    var img : Data
     
-    init(name: String, price: Int, d_day: String, save: Int, favorite: Int, month: Int, memo:String, img: String, temp:UIImage){
+    init(name: String, price: Int, d_day: String, save: Int, favorite: Int, month: Int, memo:String, img: UIImage){
         self.name = name
         self.price = price
         self.d_day = d_day
@@ -95,8 +94,8 @@ class WishItem_Save: NSObject, NSCoding {
         self.favorite = favorite
         self.money_monthly = month
         self.memo = memo
-        self.img = img
-        self.temp = temp
+        self.img = UIImagePNGRepresentation(img)!
+        //self.temp = temp
         //값을 집어넣을 때 예외처리를 해 주고 집어넣어야 함
     }
     required init?(coder aDecoder: NSCoder) {
@@ -107,8 +106,8 @@ class WishItem_Save: NSObject, NSCoding {
         self.favorite = Int(aDecoder.decodeCInt(forKey: "favorite"))
         self.money_monthly = Int(aDecoder.decodeCInt(forKey: "month"))
         self.memo = aDecoder.decodeObject(forKey: "memo") as? String ?? ""
-        self.img = aDecoder.decodeObject(forKey: "img") as? String ?? ""
-        self.temp = UIImage(data: (aDecoder.decodeObject(forKey: "temp") as! NSData) as Data)!
+        self.img = (aDecoder.decodeObject(forKey: "img") as? Data)!
+        //self.temp = UIImage(data: (aDecoder.decodeObject(forKey: "temp") as! NSData) as Data)!
         //self.photo = UIImage(data: aDecoder.decodeObjectForKey("image") as NSData)
     }
     func encode(with aCoder: NSCoder) {
@@ -120,7 +119,7 @@ class WishItem_Save: NSObject, NSCoding {
         aCoder.encode(money_monthly, forKey: "month")
         aCoder.encode(d_day, forKey: "d_day")
         aCoder.encode(img, forKey: "img")
-        aCoder.encode(temp, forKey: "temp")
+        //aCoder.encode(temp, forKey: "temp")
     }
 }
 
@@ -187,6 +186,27 @@ func loadHistory(name:String) throws -> [history]{
     return his
 }
 
+/*
+ 
+ if let image = UIImage(named: "example.png") {
+    if let data = UIImagePNGRepresentation(image) {
+        let filename = getDocumentsDirectory().appendingPathComponent("copy.png")
+        try? data.write(to: filename)
+    }
+ }
+ 
+ */
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
+/*
+func convertImage(img:UIImage) -> String {
+    if let data = UIImagePNGRepresentation(img) {
+        let filename = getDocumentsDirectory().appendingPathComponent(<#T##pathComponent: String##String#>, isDirectory: <#T##Bool#>)
+    }
+}
+*/
 //wishitems key로 저장함
 func saveWishItem(WishList: [Wish_Item]){
     formatter.dateFormat = "yyyy/MM/dd"
@@ -199,7 +219,6 @@ func saveWishItem(WishList: [Wish_Item]){
         let favor = wish.favorite ? 1 : 0
         let save = wish.save
         let date = formatter.string(from: wish.d_day!)
-        var img = ""
         
         //check nil
         if let wprice = wish.price {
@@ -211,11 +230,9 @@ func saveWishItem(WishList: [Wish_Item]){
         if let wmemo = wish.memo {
             memo = wmemo
         }
-        if let wimg = wish.img?.accessibilityIdentifier {
-            img = wimg
-        }
+        
         saveHistory(name: wish.name, histories: wish.m_info)
-        savelist.append(WishItem_Save(name: name, price: price, d_day: date, save: save, favorite: favor, month: month, memo: memo, img: img, temp:wish.img!))
+        savelist.append(WishItem_Save(name: name, price: price, d_day: date, save: save, favorite: favor, month: month, memo: memo, img: wish.img!))
         
     }
     
@@ -252,6 +269,7 @@ func loadWishItem() throws -> [Wish_Item]{
         if !wish_save.memo.isEmpty {
             item.memo = wish_save.memo
         }
+        item.img = UIImage(data: wish_save.img)
         
         do {
             try item.m_info = loadHistory(name: wish_save.name)
@@ -268,7 +286,7 @@ func loadWishItem() throws -> [Wish_Item]{
     return wish
 }
 
-
+/*
 func makeDummy() -> [Wish_Item] {
     formatter.dateFormat = "yyyy/MM/dd"
     var Items:[Wish_Item]=[]
@@ -322,6 +340,7 @@ func makeDummy() -> [Wish_Item] {
     saveWishItem(WishList: Items)
     return Items
 }
+*/
 
 let formatter = DateFormatter()
 
@@ -344,5 +363,6 @@ func getitem() -> [Wish_Item] {
 
 //var Items:[Wish_Item] = makeDummy()
 //var Items:[Wish_Item] = loadWishItem()
+//var Items:[Wish_Item] = []
 var Items:[Wish_Item] = getitem()
 let no = Items.count
