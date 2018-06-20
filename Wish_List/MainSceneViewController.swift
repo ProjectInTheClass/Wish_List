@@ -127,6 +127,16 @@ class MainSceneViewController: UIViewController {
         DayiscommingProgress.text = String(Int((DayiscommingProgressBar.progress * 100).rounded())) + "%"
     }
     
+    func refreshTotalDaily() {
+        var daily = 0
+        for item in Items {
+            if let adder = item.money_monthly {
+                daily += adder
+            }
+        }
+        Totaldaily?.text = String(daily)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let now=NSDate()
@@ -147,6 +157,7 @@ class MainSceneViewController: UIViewController {
         RefreshFavoriteCell()
         RefreshEndisnearCell()
         RefreshDayiscommingCell()
+        refreshTotalDaily()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -164,6 +175,7 @@ class MainSceneViewController: UIViewController {
         RefreshFavoriteCell()
         RefreshEndisnearCell()
         RefreshDayiscommingCell()
+        refreshTotalDaily()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
