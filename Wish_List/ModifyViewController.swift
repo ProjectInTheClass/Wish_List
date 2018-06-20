@@ -50,9 +50,6 @@ class ModifyViewController: UIViewController {
         if (Int(Month_Save.text!) != nil) {
             data?.money_monthly = Int(Month_Save.text!)
         }
-        
-        //  변경될때마다 세이브
-        saveWishItem(WishList: Items)
         self.dismiss(animated: true, completion: nil)
     }
     
