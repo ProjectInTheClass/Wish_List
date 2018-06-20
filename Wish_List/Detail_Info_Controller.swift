@@ -25,6 +25,12 @@ class Detail_info_CellView:UITableViewCell{
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        Reason?.adjustsFontSizeToFitWidth = true
+        Reason?.minimumScaleFactor = 0.2
+        Day?.adjustsFontSizeToFitWidth = true
+        Day?.minimumScaleFactor = 0.2
+        Money?.adjustsFontSizeToFitWidth = true
+        Money?.minimumScaleFactor = 0.2
     }
     
     override func prepareForReuse() {
@@ -73,9 +79,11 @@ class DetailViewController : UIViewController{
         Addsave(data : data!)
     }
     
-    
     override func viewDidLoad() {
         Navibar?.topItem?.title = data?.name
+        
+        Lists?.dataSource = self
+        Lists?.delegate = self
         
         super.viewDidLoad()
         progressDesign(ProgressBar: ProgressBar,OuterProgressBar: OuterProgressBar)
@@ -142,6 +150,7 @@ class DetailViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         Navibar?.topItem?.title = data?.name
+        self.Lists?.reloadData()
         let money : Int
         if data?.price != nil{
             money = (data?.price)! - (data?.save)!
@@ -320,7 +329,14 @@ class DetailViewController : UIViewController{
                 minusinput = Int(minustextField.text!)!
                 //exceptionhandling here
                 data.save -= minusinput
-                let output_memo = minusInfo.text!
+                    
+                    let output_memo: String
+                    if minusInfo.text != ""{
+                        output_memo = minusInfo.text!
+                    }
+                    else{
+                        output_memo = "출금"
+                    }
                 let min_his = history(info: output_memo, money: minusinput, date: Date(), is_input: false)
                 data.m_info.append(min_his)
                 
@@ -371,18 +387,20 @@ extension DetailViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 첫 번째 인자로 등록한 identifier, cell은 as 키워드로 앞서 만든 custom cell class화 해준다.
         let cell = Lists?.dequeueReusableCell(withIdentifier: "histories", for: indexPath as IndexPath) as! Detail_info_CellView // 위 작업을 마치면 커스텀 클래스의 outlet을 사용할 수 있다.
-
-        if data?.m_info[indexPath.row].is_input == true{
-            cell.Day?.textColor = UIColor.blue
+        let index = (data?.m_info.count)! - 1 - indexPath.row
+        if data?.m_info[index].is_input == true{
+            cell.Money?.textColor = UIColor.blue
+            cell.Reason?.textColor = UIColor.blue
         }
         else{
-            cell.Day?.textColor = UIColor.red
+            cell.Money?.textColor = UIColor.red
+            cell.Reason?.textColor = UIColor.red
         }
-        cell.Day?.text = "ddd"
-        cell.Money?.text = "ddd"
-        //cell.Day?.text = formatter.string(from: (data?.m_info[indexPath.row].date)!)
-       // cell.Money?.text = data?.m_info[indexPath.row].money.description
-        //cell.Reason?.text = data?.m_info[indexPath.row].info
+        
+        cell.Day?.text = formatter.string(from: (data?.m_info[index].date)!)
+        
+        cell.Money?.text = data?.m_info[index].money.description
+        cell.Reason?.text = data?.m_info[index].info
         return cell
     }
 }
