@@ -52,7 +52,6 @@ class Money_History_Controller: UIViewController{
         
         Lists?.dataSource = self
         Lists?.delegate = self
-        
         mode = 0
         var interval : Double
         var s = "-"
@@ -73,7 +72,6 @@ class Money_History_Controller: UIViewController{
                 minuses?.append(entry)
             }
         }
-        
     }
     
     @IBAction func out(){
