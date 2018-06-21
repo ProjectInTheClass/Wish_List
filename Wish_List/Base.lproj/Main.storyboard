@@ -801,8 +801,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DY9-6O-W9z">
-                                                <rect key="frame" x="350" y="4" width="20" height="22"/>
-                                                <state key="normal" image="refresh"/>
+                                                <rect key="frame" x="307" y="-2" width="63" height="34"/>
+                                                <state key="normal" title="새로고침"/>
                                                 <connections>
                                                     <action selector="FavoriteRefresh:" destination="bur-Wq-0lt" eventType="touchUpInside" id="7wl-YA-3GD"/>
                                                 </connections>
@@ -948,8 +948,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x69-A2-Kkr">
-                                                <rect key="frame" x="350" y="5" width="20" height="22"/>
-                                                <state key="normal" image="refresh"/>
+                                                <rect key="frame" x="307" y="-1" width="63" height="34"/>
+                                                <state key="normal" title="새로고침"/>
                                                 <connections>
                                                     <action selector="EndisnearRefresh:" destination="bur-Wq-0lt" eventType="touchUpInside" id="VsX-ZD-lOO"/>
                                                 </connections>
@@ -1092,8 +1092,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kk8-dc-OBJ">
-                                                <rect key="frame" x="350" y="4.5" width="20" height="22"/>
-                                                <state key="normal" image="refresh"/>
+                                                <rect key="frame" x="307" y="-1.5" width="63" height="34"/>
+                                                <state key="normal" title="새로고침"/>
                                                 <connections>
                                                     <action selector="DayiscommingRefresh:" destination="bur-Wq-0lt" eventType="touchUpInside" id="Tfs-cR-Mcs"/>
                                                 </connections>
@@ -1700,7 +1700,6 @@
         <image name="favorite_not" width="512" height="512"/>
         <image name="modify" width="512" height="512"/>
         <image name="plus" width="110" height="110"/>
-        <image name="refresh" width="20" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="n6f-C1-CM0"/>
