@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -1037,7 +1036,7 @@
                                         <rect key="frame" x="0.0" y="30" width="375" height="102.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해당 사항이 없습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWH-BV-3tm">
-                                                <rect key="frame" x="114" y="41.5" width="146" height="21"/>
+                                                <rect key="frame" x="114" y="42" width="146" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1583,67 +1582,33 @@
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-<<<<<<< Updated upstream
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vA-tN-xMT">
-                                                    <rect key="frame" x="14" y="-9" width="81" height="61"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="81" id="PEQ-CK-4ps"/>
-                                                    </constraints>
-=======
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E46-VO-Kxh">
-                                                    <rect key="frame" x="301.5" y="13" width="26.5" height="18"/>
->>>>>>> Stashed changes
+                                                    <rect key="frame" x="14" y="11" width="38" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-<<<<<<< Updated upstream
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E46-VO-Kxh">
-                                                    <rect key="frame" x="233" y="-9" width="96" height="61"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="96" id="7Qv-Kq-Dhs"/>
-                                                    </constraints>
-=======
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttq-gU-A1r">
-                                                    <rect key="frame" x="158" y="12.5" width="26.5" height="18"/>
->>>>>>> Stashed changes
+                                                    <rect key="frame" x="292" y="11" width="38" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-<<<<<<< Updated upstream
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttq-gU-A1r">
-                                                    <rect key="frame" x="125" y="-9" width="100" height="61"/>
-=======
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vA-tN-xMT">
-                                                    <rect key="frame" x="24" y="12" width="26.5" height="20"/>
->>>>>>> Stashed changes
+                                                    <rect key="frame" x="153" y="11" width="37.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-<<<<<<< Updated upstream
-                                                <constraint firstItem="9vA-tN-xMT" firstAttribute="baseline" secondItem="ttq-gU-A1r" secondAttribute="baseline" id="5cG-VA-5la"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="E46-VO-Kxh" secondAttribute="trailing" constant="-1" id="AH1-1J-8g8"/>
-                                                <constraint firstItem="9vA-tN-xMT" firstAttribute="top" secondItem="mBp-dA-8lU" secondAttribute="topMargin" constant="-20" id="DmT-z6-I7N"/>
-                                                <constraint firstItem="9vA-tN-xMT" firstAttribute="firstBaseline" secondItem="ttq-gU-A1r" secondAttribute="firstBaseline" id="GC7-uO-Oki"/>
-                                                <constraint firstItem="9vA-tN-xMT" firstAttribute="leading" secondItem="mBp-dA-8lU" secondAttribute="leadingMargin" constant="-1" id="GtT-HO-CVw"/>
-                                                <constraint firstItem="ttq-gU-A1r" firstAttribute="baseline" secondItem="E46-VO-Kxh" secondAttribute="baseline" id="KhJ-up-4fu"/>
-                                                <constraint firstItem="ttq-gU-A1r" firstAttribute="firstBaseline" secondItem="E46-VO-Kxh" secondAttribute="firstBaseline" id="N5q-6v-IMb"/>
-                                                <constraint firstItem="E46-VO-Kxh" firstAttribute="leading" secondItem="ttq-gU-A1r" secondAttribute="trailing" constant="8" symbolic="YES" id="boq-hg-EuE"/>
-                                                <constraint firstItem="9vA-tN-xMT" firstAttribute="centerY" secondItem="mBp-dA-8lU" secondAttribute="centerY" id="dz9-PG-cf6"/>
-                                                <constraint firstItem="ttq-gU-A1r" firstAttribute="leading" secondItem="9vA-tN-xMT" secondAttribute="trailing" constant="30" id="xCc-bF-nwA"/>
-=======
-                                                <constraint firstAttribute="trailing" secondItem="E46-VO-Kxh" secondAttribute="trailing" constant="15" id="BRs-8G-IJ4"/>
-                                                <constraint firstItem="9vA-tN-xMT" firstAttribute="top" secondItem="mBp-dA-8lU" secondAttribute="top" constant="12" id="RIC-Ik-qFM"/>
-                                                <constraint firstItem="ttq-gU-A1r" firstAttribute="centerX" secondItem="mBp-dA-8lU" secondAttribute="centerX" id="lKb-S6-5vF"/>
-                                                <constraint firstItem="9vA-tN-xMT" firstAttribute="leading" secondItem="mBp-dA-8lU" secondAttribute="leading" constant="24" id="n9t-Yc-VCY"/>
-                                                <constraint firstItem="E46-VO-Kxh" firstAttribute="top" secondItem="mBp-dA-8lU" secondAttribute="top" constant="13" id="nEw-Sl-8pT"/>
-                                                <constraint firstItem="E46-VO-Kxh" firstAttribute="centerY" secondItem="9vA-tN-xMT" secondAttribute="centerY" id="p6B-s3-DNl"/>
-                                                <constraint firstItem="ttq-gU-A1r" firstAttribute="centerY" secondItem="9vA-tN-xMT" secondAttribute="centerY" id="si4-4P-ek2"/>
->>>>>>> Stashed changes
+                                                <constraint firstItem="ttq-gU-A1r" firstAttribute="centerX" secondItem="mBp-dA-8lU" secondAttribute="centerX" id="NKg-dO-VTw"/>
+                                                <constraint firstItem="ttq-gU-A1r" firstAttribute="centerY" secondItem="9vA-tN-xMT" secondAttribute="centerY" id="dwZ-8g-Nbv"/>
+                                                <constraint firstItem="E46-VO-Kxh" firstAttribute="top" secondItem="mBp-dA-8lU" secondAttribute="top" constant="11" id="hbK-8z-FFh"/>
+                                                <constraint firstItem="9vA-tN-xMT" firstAttribute="top" secondItem="mBp-dA-8lU" secondAttribute="top" constant="11" id="ldh-qP-g9E"/>
+                                                <constraint firstItem="9vA-tN-xMT" firstAttribute="leading" secondItem="mBp-dA-8lU" secondAttribute="leading" constant="14" id="ogJ-uI-uUe"/>
+                                                <constraint firstItem="E46-VO-Kxh" firstAttribute="centerY" secondItem="9vA-tN-xMT" secondAttribute="centerY" id="tyg-Ld-xVg"/>
+                                                <constraint firstAttribute="trailing" secondItem="E46-VO-Kxh" secondAttribute="trailing" constant="13" id="z9K-bI-89H"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
